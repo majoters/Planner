@@ -49,6 +49,8 @@ public class AutoUpdate extends Service {
     public static List_Database listDatabase;
     public static int User_ID_Memb;
     public static ShareType shareType_pub;
+    public static int AddTomemberList_ID;
+    public static String key;
 
     @Override
     public void onStart(Intent intent, int startId) {
@@ -795,12 +797,37 @@ public class AutoUpdate extends Service {
 
 
     public static void AddToMemberList(ShareType shareType){
-        String key=shareType.getFirebaseKey();
-        MainActivity.getUser(shareType.getOwner());
-        DatabaseReference databaseReference = firebaseDatabase.getReference("Users/"+
-                shareType.getOwner()+"/"+MainActivity.getUserName()+"/PublicActivity/"+key+"/CreatorOrJoiner/MemberList");
+        key=shareType.getFirebaseKey();
+        //MainActivity.getUser(shareType.getOwner());
+        AddTomemberList_ID=shareType.getOwner();
+        DatabaseReference databaseReference1 = firebaseDatabase.getReference("Profiles");
+        databaseReference1.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
 
-        databaseReference.child(String.valueOf(MainActivity4.User_ID)).setValue(1);
+                for(DataSnapshot ds:dataSnapshot.getChildren()){
+                    if(Integer.parseInt(ds.child("ID").getValue().toString())==AddTomemberList_ID){
+                        String Username = ds.child("Username").getValue().toString();
+
+                        DatabaseReference databaseReference = firebaseDatabase.getReference("Users/"+
+                                AddTomemberList_ID+"/"+MainActivity.getUserName()+"/PublicActivity/"+key+"/CreatorOrJoiner/MemberList");
+
+                        databaseReference.child(String.valueOf(MainActivity4.User_ID)).setValue(1);
+                        break;
+                    }
+                }
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+
+
+
     }
 
     public static void AddToMemberListPermiss(ShareType shareType){

@@ -34,6 +34,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
+import com.example.Update_23_04_61.PublicZone;
 import com.example.hotmildc.shareact.MainActivity;
 import com.example.hotmildc.shareact.PositionTarget;
 import com.example.hotmildc.shareact.Post;
@@ -584,7 +585,8 @@ public class MainActivity4 extends AppCompatActivity {
         findViewById(R.id.imageButton).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(MainActivity4.this, MainActivity.class)); //searchshare
+                startActivity(new Intent(MainActivity4.this, PublicZone.class));
+                //startActivity(new Intent(MainActivity4.this, MainActivity.class)); //searchshare
             }
         });
         findViewById(R.id.imageButton4).setOnClickListener(new View.OnClickListener() {

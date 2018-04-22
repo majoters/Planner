@@ -62,15 +62,20 @@ public class ShowDelete extends Dialog implements View.OnClickListener{
                     @Override
                     public void run() {
                         //Get Share Database and Check Status
-                        if(listDatabase.getStatus()!=0){
-                            String key = MainActivity4.SHR_Model.GetKeyFromMainDbID(mDbAdabter_Model.ListToID(listDatabase));
-                            AutoUpdate.deleteOnlineAct(key);
-                            DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
-                            ref.child("Users").child(String.valueOf(MainActivity4.User_ID))
-                                    .child(MainActivity4.User).child("PublicActivity").child(key).setValue(null);
-                            MainActivity4.SHR_Model.Delete(MainActivity4.SHR_Model.KeyToId(key));
-                            MainActivity4.RefreshShareList();
+                        try{
+                            if(listDatabase.getStatus()!=0){
+                                String key = MainActivity4.SHR_Model.GetKeyFromMainDbID(mDbAdabter_Model.ListToID(listDatabase));
+                                AutoUpdate.deleteOnlineAct(key);
+                                DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
+                                ref.child("Users").child(String.valueOf(MainActivity4.User_ID))
+                                        .child(MainActivity4.User).child("PublicActivity").child(key).setValue(null);
+                                MainActivity4.SHR_Model.Delete(MainActivity4.SHR_Model.KeyToId(key));
+                                MainActivity4.RefreshShareList();
+                            }
+                        }catch (NullPointerException e){
+
                         }
+
                 /*if(listDatabase.getStatus()==2){
                     String key = MainActivity4.SHR_Model.GetKeyFromMainDbID(mDbAdabter_Model.ListToID(listDatabase));
                     MainActivity4.SHR_Model.Delete(MainActivity4.SHR_Model.KeyToId(key));

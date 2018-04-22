@@ -129,6 +129,10 @@
             android:name="com.example.hotmildc.shareact.MainActivity"
             android:theme="@style/AppTheme.NoActionBar" />
 
+        <activity
+            android:name="com.example.Update_23_04_61.PublicZone"
+            android:theme="@style/AppTheme.NoActionBar" />
+
         <receiver
             android:name="com.example.supakorn.notification_morning.AlarmNotification"
             android:enabled="true"

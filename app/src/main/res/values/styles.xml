@@ -1,5 +1,4 @@
 <resources>
-
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Customize your theme here. -->
@@ -100,6 +99,9 @@
     <style name="textLayoutInput" parent="@android:style/TextAppearance">
         <item name="colorControlActivated">@android:color/darker_gray</item>
         <item name="colorControlHighlight">@android:color/darker_gray</item>
+    </style>
+    <style name="YellowCheck">
+        <item name="colorAccent">@color/yellow</item>
     </style>
 
 </resources>
