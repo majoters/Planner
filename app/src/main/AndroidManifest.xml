@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.project.kmitl57.beelife"
+    android:versionCode="1"
+    android:versionName="1.0">
+
+    <uses-sdk android:minSdkVersion="8" />
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <!--
+         The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
+         Google Maps Android API v2, but you must specify either coarse or fine
+         location permissions for the 'MyLocation' functionality.
+    -->
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <meta-data
+            android:name="com.facebook.sdk.ApplicationId"
+            android:value="@string/facebook_app_id" />
+
+        <activity
+            android:name="com.facebook.CustomTabActivity"
+            android:exported="true" />
+        <activity
+            android:name=".Splash"
+            android:label="@string/app_name" />
+        <activity
+            android:name="com.example.supakorn.new_beelife_login.Login"
+            android:label="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.example.supakorn.new_beelife_login.SignUp"
+            android:label="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name="com.example.supakorn.new_beelife_login.Next"
+            android:label="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name="devs.mulham.raee.sample.Request"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name="devs.mulham.raee.sample.SocialPlan"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".CompactCalendar"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <!--
+            activity
+            android:name=".LoginActivity"
+            android:theme="@style/AppTheme.NoActionBar" /
+        -->
+
+        <activity
+            android:name=".MainActivity"
+            android:label="@string/title_activity_main"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <!--
+        <activity
+            android:name=".SignupActivity"
+            android:label="Sign Up"
+            android:theme="@style/AppTheme.NoActionBar" />
+        -->
+        <!--
+        <activity
+            android:name=".ResetPasswordActivity"
+            android:label="@string/title_activity_reset_password"
+            android:theme="@style/AppTheme.NoActionBar" />
+        -->
+        <!--
+             The API key for Google Maps-based APIs is defined as a string resource.
+             (See the file "res/values/google_maps_api.xml").
+             Note that the API key is linked to the encryption key used to sign the APK.
+             You need a different API key for each encryption key, including the release key that is used to
+             sign the APK for publishing.
+             You can define the keys for the debug and release targets in src/debug/ and src/release/.
+        -->
+        <activity
+            android:name="devs.mulham.raee.sample.MainActivity4"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".CalendarActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ChatActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".SettingsActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyA0sy2AYdenpCfRxjuJx1JB47MwQbH7_yU" />
+        <!--
+        <activity
+            android:name="devs.mulham.raee.sample.MainActivity4"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme.NoActionBar" />
+        -->
+        <!--
+             The API key for Google Maps-based APIs is defined as a string resource.
+             (See the file "res/values/google_maps_api.xml").
+             Note that the API key is linked to the encryption key used to sign the APK.
+             You need a different API key for each encryption key, including the release key that is used to
+             sign the APK for publishing.
+             You can define the keys for the debug and release targets in src/debug/ and src/release/.
+        -->
+
+        <activity
+            android:name="devs.mulham.raee.sample.MapsActivity"
+            android:label="@string/title_activity_maps" />
+        <activity
+            android:name="com.example.hotmildc.shareact.MainActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+
+        <receiver
+            android:name="com.example.supakorn.notification_morning.AlarmNotification"
+            android:enabled="true"
+            android:excludeFromRecents="true"
+            android:exported="true" />
+        <receiver
+            android:name="com.example.supakorn.checking.Checking"
+            android:enabled="true"
+            android:excludeFromRecents="true"
+            android:exported="true" />
+        <receiver
+            android:name="com.example.supakorn.notification_morning.AlarmRoutine"
+            android:enabled="true"
+            android:excludeFromRecents="true"
+            android:exported="true" />
+
+        <service android:name="com.example.supakorn.checking.GetUpdateCurrent" />
+        <service android:name="devs.mulham.raee.sample.AutoUpdate" />
+        <service android:name="devs.mulham.raee.sample.AutoCheckRequest" />
+        <service android:name="devs.mulham.raee.sample.NewFeed" />
+        <service android:name="devs.mulham.raee.sample.GetFriends" />
+
+        <activity android:name="devs.mulham.raee.sample.TestSuggest" />
+        <activity android:name="devs.mulham.raee.sample.ShowDatabase" />
+        <activity
+            android:name=".ProfilePage"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name="com.example.hotmildc.shareact.private_share" />
+        <activity android:name="com.example.hotmildc.shareact.RequestActivity" />
+        <activity android:name="com.example.hotmildc.shareact.AddFriends" />
+        <activity android:name="com.example.hotmildc.shareact.FriendsRequest" />
+        <activity android:name="com.example.hotmildc.shareact.ShowListFriends" />
+        <activity android:name="com.example.hotmildc.shareact.ListShare" />
+        <activity android:name="devs.mulham.raee.sample.NamePlace" />
+        <activity
+            android:name=".ProfileFriend"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name="com.example.supakorn.new_beelife_login.Register2" />
+        <activity android:name=".facebookloginAct" />
+        <activity android:name="devs.mulham.raee.sample.ShareDialog"></activity>
+    </application>
+
+</manifest>

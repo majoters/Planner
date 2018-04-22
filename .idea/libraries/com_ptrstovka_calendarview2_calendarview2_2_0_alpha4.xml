@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="com.ptrstovka.calendarview2:calendarview2-2.0-alpha4">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/calendarview2-2.0-alpha4.aar/68ac160e4886e675c5fbd04de206a94c/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/calendarview2-2.0-alpha4.aar/68ac160e4886e675c5fbd04de206a94c/res" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.ptrstovka.calendarview2/calendarview2/2.0-alpha4/54efe1b68537def9e6a64813f8d545760524afde/calendarview2-2.0-alpha4-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

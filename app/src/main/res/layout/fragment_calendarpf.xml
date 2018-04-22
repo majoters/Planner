@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/iron"
+    tools:context="com.project.kmitl57.beelife.CompactCalendar">
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/constraintLayout7"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@color/accent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.github.sundeepk.compactcalendarview.CompactCalendarView
+            android:id="@+id/cdv"
+            android:layout_width="wrap_content"
+            android:layout_height="206dp"
+            android:layout_marginBottom="16dp"
+            android:layout_marginTop="8dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            app:compactCalendarCurrentDayBackgroundColor="@color/monsoon"
+            app:compactCalendarCurrentDayTextColor="@color/accent"
+            app:compactCalendarCurrentSelectedDayBackgroundColor="@color/black"
+            app:compactCalendarCurrentSelectedDayTextColor="@color/accent"
+            app:compactCalendarMultiEventIndicatorColor="@color/blue"
+            app:compactCalendarTargetHeight="300dp"
+            app:compactCalendarTextColor="@color/black"
+            app:compactCalendarTextSize="14sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/pre" />
+
+        <TextView
+            android:id="@+id/dateShow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:text="Date"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/cdv"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageButton
+            android:id="@+id/pre"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:background="#ffffff"
+            android:src="@drawable/ic_keyboard_arrow_left_black_36dp"
+            app:layout_constraintBottom_toTopOf="@+id/cdv"
+            app:layout_constraintStart_toStartOf="@+id/cdv"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageButton
+            android:id="@+id/ne"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginTop="16dp"
+            android:background="#ffffff"
+            android:src="@drawable/ic_keyboard_arrow_right_black_36dp"
+            app:layout_constraintBottom_toTopOf="@+id/cdv"
+            app:layout_constraintEnd_toEndOf="@+id/cdv"
+            app:layout_constraintTop_toTopOf="parent" />
+    </android.support.constraint.ConstraintLayout>
+
+
+
+</android.support.constraint.ConstraintLayout>

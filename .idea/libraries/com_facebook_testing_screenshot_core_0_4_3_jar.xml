@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="com.facebook.testing.screenshot:core:0.4.3@jar">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.facebook.testing.screenshot/core/0.4.3/69bdfcbc0536921791503f47d5b3df8b562546bf/core-0.4.3.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.facebook.testing.screenshot/core/0.4.3/36c9751f4f9b44c195e4ff8b2bf79682c2e4544f/core-0.4.3-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

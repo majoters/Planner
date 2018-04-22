@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#fbfbfb</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="primary">#e43f3f</color>
+    <color name="primary_dark">#E12929</color>
+    <color name="primary_darker">#CC1D1D</color>
+    <color name="accent">#ffffff</color>
+    <color name="calendar">#ffd700</color>
+    <color name="calendarBackground">#cccccc</color>
+    <color name="activityTime">#d62d20</color>
+    <color name="fab_create_activity">#ffbd05</color>
+    <color name="black">#000000</color>
+    <color name="jet">#222222</color>
+    <color name="oil">#333333</color>
+    <color name="monsoon">#777777</color>
+    <color name="jumbo">#888888</color>
+    <color name="aluminum">#999999</color>
+    <color name="base">#AAAAAA</color>
+    <color name="iron">#cccccc</color>
+    <color name="colorBackground">#eeeeee</color>
+
+    <color name="bg_login">#26ae90</color>
+    <color name="bg_register">#2e3237</color>
+    <color name="bg_main">#428bca</color>
+    <color name="white">#ffffff</color>
+    <color name="input_login">#222222</color>
+    <color name="input_login_hint">#999999</color>
+    <color name="input_register">#888888</color>
+    <color name="input_register_bg">#3b4148</color>
+    <color name="input_register_hint">#5e6266</color>
+    <color name="btn_login">#26ae90</color>
+    <color name="btn_login_bg">#eceef1</color>
+    <color name="lbl_name">#333333</color>
+    <color name="btn_logut_bg">#ff6861</color>
+    <color name="colorshadow">#DEE4EF</color>
+
+    <color name="primary_text">#212121</color>
+    <color name="secondary_text">#727272</color>
+
+    <color name="proceed_disable">#DEDEDE</color>
+    <color name="proceed_enable">#72D63A</color>
+    <color name="colorWhite">#FFFFFF</color>
+
+
+    <color name="yellow">#ffbd05</color>
+    <color name="textDarkYellow">#d19a00</color>
+
+    <color name="brown">#5f3600</color>
+    <color name="light_yellow">#fefee5</color>
+
+
+    <color name="blue">#344e86</color>
+    <color name="yellowDark">#C78D00</color>
+
+    <color name="pbMorning">#00aeed</color>
+    <color name="pbAfternoon">#06bb8e</color>
+    <color name="pbEvening">#0e3175</color>
+
+    <color name="dark_grey">#3b4148</color>
+    <color name="grey">#ffffff</color>
+    <color name="btn_login_forgot">#aaaaaa</color>
+    <color name="btn_login_create">#777777</color>
+
+</resources>

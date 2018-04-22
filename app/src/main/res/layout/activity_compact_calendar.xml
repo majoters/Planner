@@ -1,0 +1,430 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/iron"
+    tools:context="com.project.kmitl57.beelife.CompactCalendar">
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/appBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:popupTheme="@style/AppTheme.PopupOverlay" />
+
+    </android.support.design.widget.AppBarLayout>
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/constraintLayout8"
+        android:layout_width="0dp"
+        android:layout_height="220dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:background="@color/yellow"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/appBar"
+        app:layout_constraintVertical_bias="0.0">
+
+        <TextView
+            android:id="@+id/textMonthYear"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="8dp"
+            android:ellipsize="end"
+            android:fontFamily="sans-serif"
+            android:maxEms="10"
+            android:maxLines="1"
+            android:text="Jan 2018"
+            android:textColor="@color/accent"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/textDay"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textDay"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:fontFamily="sans-serif"
+            android:maxEms="10"
+            android:maxLines="1"
+            android:text="23"
+            android:textColor="@color/black"
+            android:textSize="38sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/textStatus"
+            app:layout_constraintStart_toStartOf="@+id/textMonthYear"
+            app:layout_constraintTop_toBottomOf="@+id/textMonthYear" />
+
+        <TextView
+            android:id="@+id/textStatus"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:ellipsize="end"
+            android:fontFamily="sans-serif"
+            android:maxEms="10"
+            android:maxLines="1"
+            android:text="TODAY"
+            android:textColor="@color/black"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/constraintLayout10"
+            app:layout_constraintStart_toStartOf="@+id/textDay"
+            app:layout_constraintTop_toBottomOf="@+id/textDay" />
+
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/constraintLayout10"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_marginBottom="48dp"
+            android:layout_marginTop="20dp"
+            android:background="@color/black"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/constraintLayout9"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textStatus">
+
+            <TextView
+                android:id="@+id/textEvent"
+                android:layout_width="59dp"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:fontFamily="sans-serif"
+                android:maxEms="10"
+                android:maxLines="1"
+                android:text="TOTAL :"
+                android:textColor="@color/yellow"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                tools:layout_editor_absoluteX="16dp"
+                tools:layout_editor_absoluteY="11dp" />
+
+            <TextView
+                android:id="@+id/textn_act"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="24dp"
+                android:ellipsize="end"
+                android:fontFamily="sans-serif"
+                android:maxEms="10"
+                android:maxLines="1"
+                android:text="7 ACTIVITY"
+                android:textColor="@color/primary_dark"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toEndOf="@+id/textEvent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </android.support.constraint.ConstraintLayout>
+
+
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/constraintLayout9"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ProgressBar
+                android:id="@+id/pbMorning"
+                style="@android:style/Widget.ProgressBar.Horizontal"
+                android:layout_width="40dp"
+                android:layout_height="0dp"
+                android:layout_centerInParent="true"
+                android:layout_marginBottom="32dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="24dp"
+                android:max="100"
+
+                android:progress="100"
+                android:progressDrawable="@drawable/progressbar_morning"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="1.0" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Morning"
+                android:textColor="@color/black"
+                android:textSize="12dp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@+id/pbMorning"
+                app:layout_constraintEnd_toEndOf="@id/pbMorning"
+                app:layout_constraintStart_toStartOf="@id/pbMorning" />
+
+            <TextView
+                android:id="@+id/textMorning"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                android:ellipsize="end"
+                android:ems="10"
+                android:fontFamily="sans-serif"
+                android:gravity="center"
+                android:maxLines="1"
+                android:text="19"
+                android:textColor="@color/pbMorning"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="@id/pbMorning"
+                app:layout_constraintStart_toStartOf="@id/pbMorning"
+                app:layout_constraintTop_toBottomOf="@+id/pbMorning" />
+
+            <android.support.constraint.ConstraintLayout
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:background="@color/pbMorning"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@id/pbMorning"
+                app:layout_constraintStart_toStartOf="@id/pbMorning"
+                app:layout_constraintTop_toBottomOf="@+id/textMorning">
+
+            </android.support.constraint.ConstraintLayout>
+            <ProgressBar
+                android:id="@+id/pbAfternoon"
+                style="@android:style/Widget.ProgressBar.Horizontal"
+                android:layout_width="40dp"
+                android:layout_height="0dp"
+                android:layout_centerInParent="true"
+                android:layout_marginStart="16dp"
+                android:max="100"
+                android:progress="100"
+                android:progressDrawable="@drawable/progress_afternoon"
+                app:layout_constraintBottom_toBottomOf="@+id/pbMorning"
+                app:layout_constraintStart_toEndOf="@+id/pbMorning"
+                app:layout_constraintTop_toTopOf="@+id/pbMorning" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Afternoon"
+                android:textColor="@color/black"
+                android:textSize="12dp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@+id/pbAfternoon"
+                app:layout_constraintEnd_toEndOf="@id/pbAfternoon"
+                app:layout_constraintStart_toStartOf="@id/pbAfternoon" />
+
+            <TextView
+                android:id="@+id/textafternoon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:fontFamily="sans-serif"
+                android:maxLines="1"
+                android:text="17"
+                android:textColor="@color/pbAfternoon"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="@id/pbAfternoon"
+                app:layout_constraintStart_toStartOf="@id/pbAfternoon"
+                app:layout_constraintTop_toBottomOf="@+id/pbAfternoon" />
+
+            <android.support.constraint.ConstraintLayout
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:background="@color/pbAfternoon"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@id/pbAfternoon"
+                app:layout_constraintStart_toStartOf="@id/pbAfternoon"
+                app:layout_constraintTop_toBottomOf="@+id/textafternoon">
+
+            </android.support.constraint.ConstraintLayout>
+
+            <ProgressBar
+                android:id="@+id/pbEvening"
+                style="@android:style/Widget.ProgressBar.Horizontal"
+                android:layout_width="40dp"
+                android:layout_height="0dp"
+                android:layout_centerInParent="true"
+                android:layout_marginEnd="16dp"
+                android:layout_marginStart="16dp"
+                android:max="100"
+                android:progress="100"
+                android:progressDrawable="@drawable/progressbar_evening"
+                app:layout_constraintBottom_toBottomOf="@+id/pbMorning"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/pbAfternoon"
+                app:layout_constraintTop_toTopOf="@+id/pbMorning" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Evening"
+                android:textColor="@color/black"
+                android:textSize="12dp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@+id/pbEvening"
+                app:layout_constraintEnd_toEndOf="@id/pbEvening"
+                app:layout_constraintStart_toStartOf="@id/pbEvening" />
+
+            <TextView
+                android:id="@+id/textevening"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:fontFamily="sans-serif"
+                android:maxLines="1"
+                android:text="8"
+                android:textColor="@color/pbEvening"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="@id/pbEvening"
+                app:layout_constraintStart_toStartOf="@id/pbEvening"
+                app:layout_constraintTop_toBottomOf="@+id/pbEvening" />
+
+            <android.support.constraint.ConstraintLayout
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:background="@color/pbEvening"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@id/pbEvening"
+                app:layout_constraintHorizontal_bias="0.2"
+                app:layout_constraintStart_toStartOf="@id/pbEvening"
+                app:layout_constraintTop_toBottomOf="@+id/textevening">
+            </android.support.constraint.ConstraintLayout>
+        </android.support.constraint.ConstraintLayout>
+
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/linearLayout4"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginStart="8dp"
+            android:background="@drawable/circle_sky"
+            app:layout_constraintBottom_toBottomOf="@+id/linearLayout5"
+            app:layout_constraintStart_toEndOf="@+id/linearLayout5"
+            app:layout_constraintTop_toTopOf="@+id/linearLayout5">
+
+        </android.support.constraint.ConstraintLayout>
+
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/linearLayout5"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="22dp"
+            android:background="@drawable/circle_blue"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayout10"
+            app:layout_constraintVertical_bias="1.0">
+
+        </android.support.constraint.ConstraintLayout>
+
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/linearLayout6"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginStart="8dp"
+            android:background="@drawable/circle_green"
+            app:layout_constraintBottom_toBottomOf="@+id/linearLayout5"
+            app:layout_constraintStart_toEndOf="@+id/linearLayout4"
+            app:layout_constraintTop_toTopOf="@+id/linearLayout5">
+
+        </android.support.constraint.ConstraintLayout>
+    </android.support.constraint.ConstraintLayout>
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/constraintLayout7"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:background="@color/accent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout8">
+
+        <com.github.sundeepk.compactcalendarview.CompactCalendarView
+            android:id="@+id/cdv"
+            android:layout_width="wrap_content"
+            android:layout_height="257dp"
+            android:layout_marginTop="8dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            app:compactCalendarCurrentDayBackgroundColor="@color/monsoon"
+            app:compactCalendarCurrentDayTextColor="@color/accent"
+            app:compactCalendarCurrentSelectedDayBackgroundColor="@color/black"
+            app:compactCalendarCurrentSelectedDayTextColor="@color/accent"
+            app:compactCalendarMultiEventIndicatorColor="@color/blue"
+            app:compactCalendarTargetHeight="300dp"
+            app:compactCalendarTextColor="@color/black"
+            app:compactCalendarTextSize="14sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/pre" />
+
+        <TextView
+            android:id="@+id/dateShow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:text="Date"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/cdv"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageButton
+            android:id="@+id/pre"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:background="#ffffff"
+            android:src="@drawable/ic_keyboard_arrow_left_black_36dp"
+            app:layout_constraintBottom_toTopOf="@+id/cdv"
+            app:layout_constraintStart_toStartOf="@+id/cdv"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageButton
+            android:id="@+id/ne"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginTop="16dp"
+            android:background="#ffffff"
+            android:src="@drawable/ic_keyboard_arrow_right_black_36dp"
+            app:layout_constraintBottom_toTopOf="@+id/cdv"
+            app:layout_constraintEnd_toEndOf="@+id/cdv"
+            app:layout_constraintTop_toTopOf="parent" />
+    </android.support.constraint.ConstraintLayout>
+
+
+
+</android.support.constraint.ConstraintLayout>

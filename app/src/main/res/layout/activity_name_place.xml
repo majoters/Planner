@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="devs.mulham.raee.sample.NamePlace">
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="333dp"
+        android:layout_height="164dp"
+        tools:layout_editor_absoluteX="26dp"
+        tools:layout_editor_absoluteY="184dp">
+
+        <TextView
+            android:id="@+id/textMorning"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="1dp"
+            android:layout_marginTop="10dp"
+            android:text="Place Name"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toTopOf="@+id/placeName"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/placeName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:layout_marginEnd="7dp"
+            android:layout_marginStart="16dp"
+            android:ems="10"
+            android:hint="place name"
+            android:inputType="textPersonName"
+            app:layout_constraintBottom_toTopOf="@+id/place_ok"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/clear_place_name"
+            app:layout_constraintHorizontal_bias="0.135"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textMorning" />
+
+        <Button
+            android:id="@+id/place_ok"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="OK"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/placeName" />
+
+        <Button
+            android:id="@+id/clear_place_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="4dp"
+            android:layout_marginEnd="16dp"
+            android:text="clear"
+            app:layout_constraintBottom_toBottomOf="@+id/placeName"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/placeName" />
+    </android.support.constraint.ConstraintLayout>
+</android.support.constraint.ConstraintLayout>

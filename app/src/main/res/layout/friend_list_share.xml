@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="devs.mulham.raee.sample.FriendListShare">
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/constraintLayout"
+        android:layout_width="320dp"
+        android:layout_height="500dp"
+        android:orientation="vertical"
+        android:descendantFocusability="beforeDescendants"
+        android:focusableInTouchMode="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.496">
+
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/constraintLayout15"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:background="@color/yellow"
+            app:layout_constraintEnd_toEndOf="@+id/constraintLayout"
+            app:layout_constraintStart_toStartOf="@+id/constraintLayout"
+            app:layout_constraintTop_toTopOf="@+id/constraintLayout">
+
+            <EditText
+                android:id="@+id/textSearch"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_marginBottom="16dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:background="@color/accent"
+                android:ems="10"
+                android:hint="Search share friend"
+                android:inputType="text"
+                android:paddingHorizontal="16dp"
+                android:paddingVertical="16dp"
+                android:textAlignment="viewStart"
+                android:textAllCaps="true"
+                android:textColor="@color/black"
+                android:textColorHighlight="@color/yellow"
+                android:textColorHint="@color/monsoon"
+                android:textSize="16dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/btn_search"
+                app:layout_constraintStart_toStartOf="@+id/constraintLayout15"
+                app:layout_constraintTop_toTopOf="@+id/constraintLayout15" />
+
+            <ImageButton
+                android:id="@+id/btn_search"
+                android:layout_width="55dp"
+                android:layout_height="0dp"
+                android:layout_marginEnd="16dp"
+                android:background="@drawable/ripple_black"
+                android:src="@drawable/ic_search_white_36dp"
+                app:layout_constraintBottom_toBottomOf="@+id/textSearch"
+                app:layout_constraintEnd_toEndOf="@+id/constraintLayout15"
+                app:layout_constraintTop_toTopOf="@+id/textSearch" />
+
+        </android.support.constraint.ConstraintLayout>
+
+        <Button
+            android:id="@+id/select"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentStart="true"
+            android:background="@drawable/ripple_black"
+            android:text="select"
+            android:textColor="@color/yellow"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/constraintLayout"
+            app:layout_constraintEnd_toEndOf="@+id/constraintLayout"
+            app:layout_constraintStart_toEndOf="@+id/cancel" />
+
+        <Button
+            android:id="@+id/cancel"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentStart="true"
+            android:background="@drawable/ripple_black"
+            android:text="@string/cancel"
+            android:textColor="@color/yellow"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/constraintLayout"
+            app:layout_constraintEnd_toStartOf="@+id/select"
+            app:layout_constraintStart_toStartOf="@+id/constraintLayout" />
+
+        <ListView
+            android:id="@+id/friend_list"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:divider="#ffffff"
+            app:layout_constraintBottom_toTopOf="@+id/friend_dis"
+            app:layout_constraintEnd_toEndOf="@+id/constraintLayout"
+            app:layout_constraintStart_toStartOf="@+id/constraintLayout"
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayout15"
+            android:focusable="false"
+            android:focusableInTouchMode="false"/>
+
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/friend_dis"
+            android:layout_width="0dp"
+            android:layout_height="70dp"
+            android:layout_marginBottom="4dp"
+            android:layout_marginTop="4dp"
+            app:layout_constraintBottom_toTopOf="@+id/select"
+            app:layout_constraintEnd_toEndOf="@+id/constraintLayout"
+            app:layout_constraintStart_toStartOf="@+id/constraintLayout"
+            app:layout_constraintTop_toBottomOf="@+id/friend_list">
+
+        </android.support.v7.widget.RecyclerView>
+
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/nf"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:visibility="gone"
+            android:background="@color/accent"
+            app:layout_constraintBottom_toTopOf="@+id/friend_dis"
+            app:layout_constraintEnd_toEndOf="@+id/constraintLayout15"
+            app:layout_constraintStart_toStartOf="@+id/constraintLayout15"
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayout15">
+
+            <ImageView
+                android:id="@+id/status"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_marginBottom="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:src="@drawable/no_status"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.39999998" />
+
+            <TextView
+                android:id="@+id/nofri"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="No friend"
+                android:textAllCaps="true"
+                android:textColor="@color/black"
+                android:textSize="25dp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="@+id/status"
+                app:layout_constraintStart_toStartOf="@+id/status"
+                app:layout_constraintTop_toBottomOf="@+id/status" />
+
+        </android.support.constraint.ConstraintLayout>
+    </android.support.constraint.ConstraintLayout>
+</android.support.constraint.ConstraintLayout>
