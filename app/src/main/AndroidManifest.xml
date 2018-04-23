@@ -124,7 +124,8 @@
 
         <activity
             android:name="devs.mulham.raee.sample.MapsActivity"
-            android:label="@string/title_activity_maps" />
+            android:label="@string/title_activity_maps"
+            android:theme="@style/AppTheme.NoActionBar" />/>
         <activity
             android:name="com.example.hotmildc.shareact.MainActivity"
             android:theme="@style/AppTheme.NoActionBar" />

@@ -77,24 +77,28 @@ public class SocialPlan extends AppCompatActivity {
                     mLocation.clear();
                     mTime.clear();
                     for(int i = 0;i<publicActivities.size();i++){
-                        mUsername.add(publicActivities.get(i).getUsername());
-                        mActivity.add(publicActivities.get(i).getDetail());
-                        if(publicActivities.get(i).getBaseAccept()==1||publicActivities.get(i).getBaseAccept()==2){
+                        if(publicActivities.get(i).getBaseAccept()==3) {
+                            mUsername.add(publicActivities.get(i).getUsername());
+                            mActivity.add(publicActivities.get(i).getDetail());
+                        /*if(publicActivities.get(i).getBaseAccept()==1||publicActivities.get(i).getBaseAccept()==2){
                             mLocation.add(publicActivities.get(i).getLocationName());
                         }else{
-                            if(publicActivities.get(i).getBaseAccept()==3){
+
+                        }*/
+                            if (publicActivities.get(i).getBaseAccept() == 3) {
                                 mLocation.add("Send Request");
-                            }else if(publicActivities.get(i).getBaseAccept()==4){
+                            } else if (publicActivities.get(i).getBaseAccept() == 4) {
                                 mLocation.add("Owner Accept Request");
                             }
+                            mTime.add(publicActivities.get(i).getTime());
                         }
-                        mTime.add(publicActivities.get(i).getTime());
                     }
                     Date date = new Date();
-                    for(int i=0;i<MainActivity4.databases.size();i++){
+                    /*for(int i=0;i<MainActivity4.databases.size();i++){
                         List_Database db=MainActivity4.databases.get(i);
                         if(db.getDate()==date.getDate()*10000+(date.getMonth()+1)*100+date.getYear()%100){
-                            if(db.getStatus()==1||db.getStatus()==2||db.getStatus()==3||db.getStatus()==4){
+                            if(db.getStatus()==3||db.getStatus()==4){
+
                                 /*PublicActivity publicActivity = new PublicActivity(MainActivity4.User_ID,
                                         MainActivity4.User,MainActivity4.SHR_Model.GetKeyFromMainDbID(db.getID()));
                                 publicActivity.setBaseAccept(db.getStatus());
@@ -104,7 +108,7 @@ public class SocialPlan extends AppCompatActivity {
                                 publicActivity.setLocationName(db.getLocationName());
                                 publicActivity.setLatitude(db.getLatitude());
                                 publicActivity.setLongitude(db.getLongitude());*/
-                                mUsername.add(MainActivity4.User);
+                               /* mUsername.add(MainActivity4.User);
                                 mActivity.add(db.getDescription());
                                 if(db.getStatus()==1||db.getStatus()==2){
                                     mLocation.add(db.getLocationName());
@@ -118,7 +122,7 @@ public class SocialPlan extends AppCompatActivity {
                                 mTime.add(MainActivity.ConvertTimeToString(db.getTime()));
                             }
                         }
-                    }
+                    }*/
                     //swap
                     for(int i=0;i<mTime.size();i++){
                         for(int j=0;j<mTime.size()-1;j++){

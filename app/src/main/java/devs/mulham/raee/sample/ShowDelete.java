@@ -49,9 +49,11 @@ public class ShowDelete extends Dialog implements View.OnClickListener{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.delete_activity);
         Description=(TextView)findViewById(R.id.edit_activity);
+        TextView Time=(TextView)findViewById(R.id.edit_time);
         Yes=(Button)findViewById(R.id.yes);
         No=(Button)findViewById(R.id.no);
         Description.setText(listDatabase.getDescription());
+        Time.setText(MainActivity.ConvertTimeToString(listDatabase.getTime()));
 
         Yes.setOnClickListener(new View.OnClickListener() {
             @Override
