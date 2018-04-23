@@ -9,6 +9,7 @@ import android.widget.AdapterView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.Update_23_04_61.SocailPlanDialog;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -52,10 +53,14 @@ class SocialPlanAdapter extends RecyclerView.Adapter<SocialPlanAdapter.ViewHolde
 
     @Override
     public void onBindViewHolder(final SocialPlanAdapter.ViewHolder holder, int position) {
-        holder.uN.setText(UserName.get(position));
-        holder.act.setText(Activity.get(position));
-        holder.loc.setText(Location.get(position));
-        holder.tim.setText(Time.get(position));
+        try {
+            holder.uN.setText(UserName.get(position));
+            holder.act.setText(Activity.get(position));
+            holder.loc.setText(Location.get(position));
+            holder.tim.setText(Time.get(position));
+        }catch (IndexOutOfBoundsException e){
+
+        }
 
     }
 
@@ -77,11 +82,17 @@ class SocialPlanAdapter extends RecyclerView.Adapter<SocialPlanAdapter.ViewHolde
             tim = (TextView) itemView.findViewById(R.id.textTime);
 
 
+
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    try{
-                        int index=getPosition();
+
+                    int index=getPosition();
+                    SocailPlanDialog socailPlanDialog = new SocailPlanDialog(mCx,UserName.get(index),
+                            Activity.get(index),Time.get(index),index);
+                    socailPlanDialog.show();
+
+                    /*try{
                         int BaseAccept=SocialPlan.publicActivities.get(index).getBaseAccept();
                         Toast.makeText(mCx,UserName.get(index),Toast.LENGTH_SHORT).show();
 
@@ -138,7 +149,7 @@ class SocialPlanAdapter extends RecyclerView.Adapter<SocialPlanAdapter.ViewHolde
                         }
                     }catch (IndexOutOfBoundsException e) {
                         Toast.makeText(mCx,"It's Your Activity",Toast.LENGTH_SHORT).show();
-                    }
+                    }*/
                 }
             });
             //itemView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener(){

@@ -15,23 +15,29 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <ImageView
-            android:id="@+id/imageView2"
+        <TextView
+            android:id="@+id/edit_time"
             android:layout_width="wrap_content"
-            android:layout_height="50dp"
+            android:layout_height="27dp"
+            android:layout_marginBottom="260dp"
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
-            android:src="@drawable/bicycle_rider"
+            android:layout_marginTop="-10dp"
+            android:text="Activity Name"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="20dp"
+            android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.293" />
+            app:layout_constraintTop_toBottomOf="@+id/yes" />
 
         <TextView
             android:id="@+id/edit_activity"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="27dp"
+            android:layout_marginBottom="330dp"
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
             android:text="Activity Name"
@@ -42,8 +48,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView2"
-            app:layout_constraintVertical_bias="0.050000012" />
+            app:layout_constraintTop_toBottomOf="@+id/yes" />
 
         <TextView
             android:id="@+id/edit_time"
@@ -66,8 +71,9 @@
             style="?android:attr/borderlessButtonStyle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:background="@drawable/ripple_yellow"
+            android:background="@drawable/ripple_black"
             android:text="YES"
+            android:textColor="@color/yellow"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -78,8 +84,9 @@
             style="?android:attr/borderlessButtonStyle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:background="@drawable/ripple_yellow"
+            android:background="@drawable/ripple_black"
             android:text="NO"
+            android:textColor="@color/yellow"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/yes"

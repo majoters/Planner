@@ -93,6 +93,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mapFragment.getMapAsync(this);
         nearplace=(Button)findViewById(R.id.nearplace);
         allplace=new ArrayList<>();
+
         //ViewGroup.LayoutParams params = mapFragment.getView().getLayoutParams();
         //params.height = 1650;
 
