@@ -158,9 +158,9 @@ public class MainActivity4 extends AppCompatActivity {
         overridePendingTransition(R.anim.move_left_in_activity, R.anim.move_right_out_activity);
         //long now=date.getYear()%100*100000000+(date.getMonth()+1)*1000000+date.getDate()%100*10000+date.getHours()*100+date.getMinutes();
         //Log.d("now : ", String.valueOf(date.getMonth()));
-        Log.d("User",User);
+        /*Log.d("User",User);
         Log.d("User id", String.valueOf(User_ID));
-        Log.d("Email",Email);
+        Log.d("Email",Email);*/
         firebaseDatabase=FirebaseDatabase.getInstance();
         listView = (ListView) findViewById(R.id.list);
         suggest = (ListView)findViewById(R.id.Suggest);

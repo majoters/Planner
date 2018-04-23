@@ -51,6 +51,7 @@ public class AutoUpdate extends Service {
     public static ShareType shareType_pub;
     public static int AddTomemberList_ID;
     public static String key;
+    public DataSnapshot dataSn;
 
     @Override
     public void onStart(Intent intent, int startId) {
@@ -84,7 +85,6 @@ public class AutoUpdate extends Service {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 showDataPost(dataSnapshot,MainActivity4.User);
 
-
             }
 
             @Override
@@ -101,22 +101,26 @@ public class AutoUpdate extends Service {
         final FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
         DatabaseReference databaseReference;
 
-        for(final DataSnapshot ds: dataSnapshot.getChildren()) {
-
+        for(DataSnapshot ds: dataSnapshot.getChildren()) {
+            dataSn = ds;
             databaseReference = firebaseDatabase.getReference("Users/" +
                     MainActivity4.User_ID+"/"+user + "/PublicActivity/" + ds.getKey() + "/Location/");
 
-            status=ds.toString().charAt(ds.toString().indexOf("BaseAccept")+11)-48;
+            //status=ds.toString().charAt(ds.toString().indexOf("BaseAccept")+11)-48;
+            try{
+
+                status=Integer.parseInt(ds.child("CreatorOrJoiner").child("BaseAccept").getValue().toString());
+            }catch (NullPointerException e){
+                status=0;
+            }
             try {
-                int index_start=ds.getValue().toString().indexOf("JoinWith")+9;
-                int index_stop=ds.getValue().toString().substring(index_start).indexOf("}");
-                owner=Integer.parseInt(ds.getValue().toString().substring(index_start,index_start+index_stop));
+                owner=Integer.parseInt(ds.child("CreatorOrJoiner").child("JoinWith").getValue().toString());
             }catch (NumberFormatException e){
                 owner=0;
+            }catch (NullPointerException e){
+
             }
-            if(ds.toString().charAt(ds.toString().indexOf("BaseAccept")+11)-48==2||ds.toString().charAt(ds.toString().indexOf("BaseAccept")+11)-48==4||
-            ds.toString().charAt(ds.toString().indexOf("BaseAccept")+11)-48==5||ds.toString().charAt(ds.toString().indexOf("BaseAccept")+11)-48==6||
-                    ds.toString().charAt(ds.toString().indexOf("BaseAccept")+11)-48==9){
+            if(status==2||status==4||status==5||status==6||status==9){
                 databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
@@ -124,9 +128,9 @@ public class AutoUpdate extends Service {
                             try{
                                 PositionTarget positionTarget = new PositionTarget();
                                 Post post = new Post();
-                                post.setDetail(ds.getValue(Post.class).getDetail());
-                                post.setDate(ds.getValue(Post.class).getDate());
-                                post.setTime(ds.getValue(Post.class).getTime());
+                                post.setDetail(dataSn.getValue(Post.class).getDetail());
+                                post.setDate(dataSn.getValue(Post.class).getDate());
+                                post.setTime(dataSn.getValue(Post.class).getTime());
                                 positionTarget.setName(dataSnapshot.getValue(PositionTarget.class).getName());
                                 positionTarget.setLatitude(dataSnapshot.getValue(PositionTarget.class).getLatitude());
                                 positionTarget.setLongitude(dataSnapshot.getValue(PositionTarget.class).getLongitude());
@@ -135,7 +139,7 @@ public class AutoUpdate extends Service {
                                 DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
                                 DateFormat timeFormat = new SimpleDateFormat("hh:mm");
                                 Date d = new Date();
-                                ShareType shareType =new ShareType(-1,ds.getRef().toString(),ds.getKey(),
+                                ShareType shareType =new ShareType(-1,dataSn.getRef().toString(),dataSn.getKey(),
                                         status,owner);
                                 if (convertDate(post.getDate()) > convertDate(String.valueOf(dateFormat.format(d)))) {
                                     putPost(post);
@@ -810,7 +814,7 @@ public class AutoUpdate extends Service {
                         String Username = ds.child("Username").getValue().toString();
 
                         DatabaseReference databaseReference = firebaseDatabase.getReference("Users/"+
-                                AddTomemberList_ID+"/"+MainActivity.getUserName()+"/PublicActivity/"+key+"/CreatorOrJoiner/MemberList");
+                                AddTomemberList_ID+"/"+Username+"/PublicActivity/"+key+"/CreatorOrJoiner/MemberList");
 
                         databaseReference.child(String.valueOf(MainActivity4.User_ID)).setValue(1);
                         break;

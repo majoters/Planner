@@ -41,6 +41,7 @@ public class PublicZone extends AppCompatActivity {
     public CustomSearch adapter;
     public static String Username_search,ID_search;
     public boolean found = false;
+    public String User_Daily,ID_Daily;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -99,25 +100,30 @@ public class PublicZone extends AppCompatActivity {
                                         Date date = new Date();
                                         int date_compare = (1900+date.getYear())*10000+((date.getMonth()+1)*100)+(date.getDate());
                                         for(DataSnapshot ds:dataSnapshot.getChildren()){
-                                            int date_post=MainActivity.convertDate(ds.child("Date").getValue().toString());
-                                            if(date_post>date_compare&&
-                                                    ds.child("CreatorOrJoiner").child("BaseAccept").getValue().toString().compareTo("1")==0){
+                                            try {
+                                                int date_post=MainActivity.convertDate(ds.child("Date").getValue().toString());
+                                                if(date_post>=date_compare&&
+                                                        ds.child("CreatorOrJoiner").child("BaseAccept").getValue().toString().compareTo("1")==0){
 
-                                                List_Database list_database = new List_Database(
-                                                        MainActivity.convertDateToForm(ds.child("Date").getValue().toString()),
-                                                        MainActivity.convertTime(ds.child("Time").getValue().toString()),
-                                                        ds.child("Detail").getValue().toString(),
-                                                        ds.child("Location").child("name").getValue().toString(),
-                                                        Double.parseDouble(ds.child("Location").child("latitude").getValue().toString()),
-                                                        Double.parseDouble(ds.child("Location").child("longitude").getValue().toString()),
-                                                        2);
+                                                    List_Database list_database = new List_Database(
+                                                            MainActivity.convertDateToForm(ds.child("Date").getValue().toString()),
+                                                            MainActivity.convertTime(ds.child("Time").getValue().toString()),
+                                                            ds.child("Detail").getValue().toString(),
+                                                            ds.child("Location").child("name").getValue().toString(),
+                                                            Double.parseDouble(ds.child("Location").child("latitude").getValue().toString()),
+                                                            Double.parseDouble(ds.child("Location").child("longitude").getValue().toString()),
+                                                            2);
 
-                                                ShareType shareType = new ShareType(-1,ds.getRef().toString(),ds.getKey().toString(),1,Integer.parseInt(ID_search));
+                                                    ShareType shareType = new ShareType(-1,ds.getRef().toString(),ds.getKey().toString(),1,Integer.parseInt(ID_search));
 
-                                                DataPost.add(list_database);
-                                                DataShare.add(shareType);
+                                                    DataPost.add(list_database);
+                                                    DataShare.add(shareType);
+
+                                                }
+                                            }catch (NullPointerException e){
 
                                             }
+
 
                                         }
                                         /*CustomSearch adapter = new CustomSearch(MainActivity.this,DataPost);
@@ -130,6 +136,7 @@ public class PublicZone extends AppCompatActivity {
                                         mRecyclerView.setLayoutManager(mLayoutManager);
                                         final PublicZoneAdapter mAdapter = new PublicZoneAdapter(PublicZone.this,DataPost,DataShare,Integer.parseInt(ID_search),Username_search);
                                         mRecyclerView.setAdapter(mAdapter);
+                                        found = false;
                                     }
 
                                     @Override
@@ -152,7 +159,77 @@ public class PublicZone extends AppCompatActivity {
             }
         });
 
+        DatabaseReference getAllPost = database.getReference("Profiles/");
+        getAllPost.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                DataPost.clear();
+                DataShare.clear();
+                for(DataSnapshot ds:dataSnapshot.getChildren()){
+                    User_Daily = ds.child("Username").getValue().toString();
+                    ID_Daily = ds.child("ID").getValue().toString();
 
+                    FirebaseDatabase getPublic = FirebaseDatabase.getInstance();
+                    DatabaseReference getAct = getPublic.getReference("Users/"+ID_Daily+"/"+User_Daily+
+                    "/PublicActivity/");
+
+                    getAct.addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+                            Date date = new Date();
+                            int date_compare = (1900+date.getYear())*10000+((date.getMonth()+1)*100)+(date.getDate());
+                            for(DataSnapshot ds:dataSnapshot.getChildren()){
+                                try {
+                                    int date_post=MainActivity.convertDate(ds.child("Date").getValue().toString());
+                                    if(date_post>=date_compare&&
+                                            ds.child("CreatorOrJoiner").child("BaseAccept").getValue().toString().compareTo("1")==0){
+
+                                        List_Database list_database = new List_Database(
+                                                MainActivity.convertDateToForm(ds.child("Date").getValue().toString()),
+                                                MainActivity.convertTime(ds.child("Time").getValue().toString()),
+                                                ds.child("Detail").getValue().toString(),
+                                                ds.child("Location").child("name").getValue().toString(),
+                                                Double.parseDouble(ds.child("Location").child("latitude").getValue().toString()),
+                                                Double.parseDouble(ds.child("Location").child("longitude").getValue().toString()),
+                                                2);
+
+                                        ShareType shareType = new ShareType(-1,ds.getRef().toString(),ds.getKey().toString(),1,Integer.parseInt(ID_Daily));
+
+                                        DataPost.add(list_database);
+                                        DataShare.add(shareType);
+
+                                    }
+                                }catch (NullPointerException e){
+
+                                }
+
+
+                            }
+                                        /*CustomSearch adapter = new CustomSearch(MainActivity.this,DataPost);
+                                        result.setAdapter(adapter);
+                                        result.invalidate();*/
+
+                            final RecyclerView mRecyclerView = (RecyclerView) findViewById(R.id.recycler_view);
+                            mRecyclerView.setHasFixedSize(true);
+                            final LinearLayoutManager mLayoutManager = new LinearLayoutManager(PublicZone.this,LinearLayoutManager.HORIZONTAL,false);
+                            mRecyclerView.setLayoutManager(mLayoutManager);
+                            final PublicZoneAdapter mAdapter = new PublicZoneAdapter(PublicZone.this,DataPost,DataShare,Integer.parseInt(ID_Daily),User_Daily);
+                            mRecyclerView.setAdapter(mAdapter);
+                        }
+
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
+
+                        }
+                    });
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
 
     }
 }
