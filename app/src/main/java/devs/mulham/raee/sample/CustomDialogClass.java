@@ -15,6 +15,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -81,6 +82,7 @@ public class CustomDialogClass extends Dialog implements android.view.View.OnCli
     Button plus;
     static TextView typeshare;
     public static FriendListShare friendListShare;
+    public static boolean important;
     public CustomDialogClass(Activity a) {
         super(a);
         this.c = a;
@@ -125,11 +127,17 @@ public class CustomDialogClass extends Dialog implements android.view.View.OnCli
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.custom_dialog);
         final EditText description = (EditText)findViewById(R.id.Description);
+        final CheckBox box = (CheckBox)findViewById(R.id.checkBox2);
         typeshare=(TextView)findViewById(R.id.typeshare);
         switchCompat = (SwitchCompat)findViewById(R.id.switchCompat);
         plus=(Button)findViewById(R.id.add_to_share);
         mDataSet = new ArrayList<>();
         mDataSet.clear();
+        if (box.isChecked()) {
+            important = true;
+        } else {
+            important = false;
+        }
         switchCompat.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -277,13 +285,13 @@ public class CustomDialogClass extends Dialog implements android.view.View.OnCli
                         int minute = Integer.parseInt(Minutes);
                         long now=date.getYear()%100*100000000+(date.getMonth()+1)*1000000+date.getDate()%100*10000+date.getHours()*100+date.getMinutes();
                         long factor = listdate%100*100000000+listdate%10000/100*1000000+listdate/10000*10000+hour*100+minute;
-                        if(now>=factor){
-                            CancelActivity=true;
-                            Toast.makeText(context, "You can't back to your time", Toast.LENGTH_SHORT).show();
-                        }
-                        else{
-                            CancelActivity=false;
-                        }
+                        //if(now>=factor){
+                        //    CancelActivity=true;
+                        //    Toast.makeText(context, "You can't back to your time", Toast.LENGTH_SHORT).show();
+                        //}
+                        //else{
+                        //    CancelActivity=false;
+                        //}
                     }
                     if(!CancelActivity){
                         String Hours = String.valueOf(simpleTimePicker.getCurrentHour());
@@ -314,13 +322,14 @@ public class CustomDialogClass extends Dialog implements android.view.View.OnCli
                             ActivityLocation.add(locate.getText().toString());
                             ActivityArrive.add(false);
                             List_Database list = new List_Database(key_date, key_time, description.getText().toString(), String.valueOf(MainActivity4.location.getName()),
-                                    MainActivity4.location.getLatLng().latitude, MainActivity4.location.getLatLng().longitude, statusActivity,false);
+                                    MainActivity4.location.getLatLng().latitude, MainActivity4.location.getLatLng().longitude, statusActivity,false,important);
                             MainActivity4.databases.add(0, list);
                             MainActivity4.mDbAdabter_Model.createActivityList(new List_Database(key_date, key_time, description.getText().toString(), String.valueOf(MainActivity4.location.getName()),
-                                    MainActivity4.location.getLatLng().latitude, MainActivity4.location.getLatLng().longitude, statusActivity,false));
+                                    MainActivity4.location.getLatLng().latitude, MainActivity4.location.getLatLng().longitude, statusActivity,false,important));
                             MainActivity4.mDbDataForAnalysis_Model.InsertData(date.getHours() * 100 + date.getMinutes(),
                                     list);
                             MainActivity4.mDbDayOfWeekAnalysis_Model.InsertData(key_date,list);
+                            //MainActivity4.mDbImportantAnalysis_Model.InsertData(list);
 
 
                             if(statusActivity>0){

@@ -193,9 +193,24 @@
                     tools:ignore="NotSibling">
 
                 </TimePicker>
+
             </android.support.constraint.ConstraintLayout>
         </android.support.constraint.ConstraintLayout>
 
+
+        <CheckBox
+            android:id="@+id/checkBox2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="Important"
+            app:layout_constraintBottom_toTopOf="@+id/recyclerView_friend"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayout14" />
 
         <Button
             android:id="@+id/OK"

@@ -82,6 +82,7 @@ public class Checking extends BroadcastReceiver {
             public void onFinish() {
                 TimeUp=true;
                 if(WorkDone==false&&TimeUp==true&&SetCancel!=true){
+                    MainActivity4.mDbAdabter_Model.UpdateArrive(ID_Request-1000,WorkDone);
                     mNotificationHelper = new NotificationHelper2(contextpub);
                     notificate("คำเตือน","คุณกำลังจะพลาดรายการสิ่งที่ต้องทำของคุณ");
                 }

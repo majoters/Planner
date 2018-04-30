@@ -14,6 +14,8 @@ public class DataAnalysis {
     public int frequency;
     public int group;
     public String DayOfWeek;
+    public int important;
+    public int arrive;
 
     public DataAnalysis(int time, int timeAct, String description, String locationName, double latitude, double longitude, int frequency, int group) {
         this.Time = time;
@@ -32,6 +34,16 @@ public class DataAnalysis {
         this.LocationName = locationName;
         this.latitude = latitude;
         this.longitude = longitude;
+        this.frequency = frequency;
+    }
+    public DataAnalysis(int timeAct, String description, String locationName, double latitude, double longitude,int important,int arrive, int frequency) {
+        this.TimeAct = timeAct;
+        this.Description = description;
+        this.LocationName = locationName;
+        this.latitude = latitude;
+        this.longitude = longitude;
+        this.important = important;
+        this.arrive = arrive;
         this.frequency = frequency;
     }
 

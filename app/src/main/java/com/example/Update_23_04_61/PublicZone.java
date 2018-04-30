@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -78,6 +79,7 @@ public class PublicZone extends AppCompatActivity {
                 DataPost.clear();
                 DataShare.clear();
                 if(!found){
+                    Log.d("Search Step","");
                     DatabaseReference FindUser = firebaseDatabase.getReference("Profiles");
                     FindUser.addValueEventListener(new ValueEventListener() {
                         @Override

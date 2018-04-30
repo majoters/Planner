@@ -27,7 +27,9 @@ public class ActivityDbAdapter {
     public static final String COL_LATITUDE="latitude";
     public static final String COL_LONGITUDE="longitude";
     public static final String COL_SHARE="share";
+    public static final String COL_IMPORTANT="important";
     public static final String COL_ARRIVE="arrive";
+
 
     public static int INDEX_ID=0;
     public static int INDEX_DATE=INDEX_ID+1;
@@ -37,7 +39,8 @@ public class ActivityDbAdapter {
     public static int INDEX_LATITUDE=INDEX_ID+5;
     public static int INDEX_LONGITUDE=INDEX_ID+6;
     public static int INDEX_SHARE=INDEX_ID+7;
-    public static int INDEX_ARRIVE=INDEX_ID+8;
+    public static int INDEX_IMPORTANT=INDEX_ID+8;
+    public static int INDEX_ARRIVE=INDEX_ID+9;
 
     private static final String TAG="ActivityListDatabase";
 
@@ -46,7 +49,7 @@ public class ActivityDbAdapter {
 
     private static final String DATABASE_NAME="AcitivityList_Database";
     private static final String TABLE_NAME="Table_ActivityList";
-    private static final int DATABASE_VERSION=1;
+    private static final int DATABASE_VERSION=2;
 
     private final Context mCtx;
 
@@ -60,6 +63,7 @@ public class ActivityDbAdapter {
                     COL_LATITUDE+" REAL, "+
                     COL_LONGITUDE+" REAL, "+
                     COL_SHARE+" INTEGER, "+
+                    COL_IMPORTANT+" INTEGER, "+
                     COL_ARRIVE+" INTEGER "+ ");";
 
     public ActivityDbAdapter(Context ctx){
@@ -87,6 +91,7 @@ public class ActivityDbAdapter {
             values.put(COL_LATITUDE,list_database.getLatitude());
             values.put(COL_LONGITUDE,list_database.getLongitude());
             values.put(COL_SHARE,list_database.getStatus());
+            values.put(COL_IMPORTANT,list_database.getImportant());
             values.put(COL_ARRIVE,list_database.getArrive());
 
             mDb.insert(TABLE_NAME,null,values);
@@ -98,7 +103,7 @@ public class ActivityDbAdapter {
 
     public int NumberOfList(){
         Cursor cursor= mDb.query(TABLE_NAME, new String[]{COL_ID,
-        COL_DATE,COL_TIME,COL_DESCRIPTION,COL_LOCATION,COL_LATITUDE,COL_LONGITUDE,COL_SHARE,COL_ARRIVE},
+        COL_DATE,COL_TIME,COL_DESCRIPTION,COL_LOCATION,COL_LATITUDE,COL_LONGITUDE,COL_SHARE,COL_IMPORTANT,COL_ARRIVE},
                 null,null,null,null,null);
         int n=cursor.getCount();
         cursor.close();
@@ -108,7 +113,7 @@ public class ActivityDbAdapter {
     public ArrayList<List_Database> fecthAllList(){
         Cursor cursor= mDb.query(TABLE_NAME,new String[]{
                 COL_ID,COL_DATE,COL_TIME,COL_DESCRIPTION,
-                COL_LOCATION,COL_LATITUDE,COL_LONGITUDE,COL_SHARE,COL_ARRIVE},null,null,null,null,null);
+                COL_LOCATION,COL_LATITUDE,COL_LONGITUDE,COL_SHARE,COL_IMPORTANT,COL_ARRIVE},null,null,null,null,null);
 
         if(cursor!=null&&cursor.getCount()>0) {
             cursor.moveToFirst();
@@ -119,7 +124,7 @@ public class ActivityDbAdapter {
             while (!cursor.isAfterLast()) {
                 List_Database list = new List_Database(cursor.getInt(INDEX_DATE), cursor.getInt(INDEX_TIME),
                         cursor.getString(INDEX_DESCRIPTION), cursor.getString(INDEX_LOCATION),
-                        cursor.getFloat(INDEX_LATITUDE),cursor.getFloat(INDEX_LONGITUDE),cursor.getInt(INDEX_SHARE),cursor.getInt(INDEX_ARRIVE));
+                        cursor.getFloat(INDEX_LATITUDE),cursor.getFloat(INDEX_LONGITUDE),cursor.getInt(INDEX_SHARE),cursor.getInt(INDEX_IMPORTANT),cursor.getInt(INDEX_ARRIVE));
                 list.setID(cursor.getInt(INDEX_ID));
                 List.add(list);
                 cursor.moveToNext();
@@ -145,6 +150,7 @@ public class ActivityDbAdapter {
         values.put(COL_LATITUDE,list_database.getLatitude());
         values.put(COL_LONGITUDE,list_database.getLongitude());
         values.put(COL_SHARE,list_database.getStatus());
+        values.put(COL_IMPORTANT,list_database.getImportant());
         values.put(COL_ARRIVE,list_database.getStatus());
 
         mDb.update(TABLE_NAME, values,
@@ -163,6 +169,7 @@ public class ActivityDbAdapter {
         mDb.update(TABLE_NAME, values,
                 COL_ID + "=?",
                 new String[]{String.valueOf(ID)});
+        MainActivity4.mDbImportantAnalysis_Model.InsertData(fetchByID(ID));
         MainActivity4.Refresh();
         MainActivity4.RefreshShareList();
     }
@@ -176,7 +183,7 @@ public class ActivityDbAdapter {
     public List_Database fetchByID(int id){
         Cursor cursor=mDb.query(TABLE_NAME, new String[]{COL_ID,
         COL_DATE,COL_TIME,COL_DESCRIPTION,COL_LOCATION,COL_LATITUDE,COL_LONGITUDE,
-                COL_SHARE,COL_ARRIVE},COL_ID+"=?",
+                COL_SHARE,COL_IMPORTANT,COL_ARRIVE},COL_ID+"=?",
                 new String[]{String.valueOf(id)},null,null,null);
 
         if(cursor!=null&&cursor.getCount()>0){
@@ -185,7 +192,7 @@ public class ActivityDbAdapter {
                     cursor.getInt(INDEX_TIME),cursor.getString(INDEX_DESCRIPTION),
                     cursor.getString(INDEX_LOCATION),cursor.getFloat(INDEX_LATITUDE),
                     cursor.getFloat(INDEX_LONGITUDE),cursor.getInt(INDEX_SHARE),
-                    cursor.getInt(INDEX_ARRIVE));
+                    cursor.getInt(INDEX_IMPORTANT), cursor.getInt(INDEX_ARRIVE));
 
             cursor.close();
             return listDatabase;
@@ -199,7 +206,7 @@ public class ActivityDbAdapter {
 
     public int ListToID(List_Database list_database){
         Cursor cursor=mDb.query(TABLE_NAME, new String[]{COL_ID,
-                        COL_DATE,COL_TIME,COL_DESCRIPTION,COL_LOCATION,COL_LATITUDE,COL_LONGITUDE,COL_SHARE,COL_ARRIVE},null,
+                        COL_DATE,COL_TIME,COL_DESCRIPTION,COL_LOCATION,COL_LATITUDE,COL_LONGITUDE,COL_SHARE,COL_IMPORTANT,COL_ARRIVE},null,
                 null,null,null,null);
 
         if(cursor!=null&&cursor.getCount()>0){

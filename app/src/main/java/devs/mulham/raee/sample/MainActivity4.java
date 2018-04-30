@@ -58,6 +58,7 @@ import com.project.kmitl57.beelife.CustomNavbarMenu;
 import com.project.kmitl57.beelife.DataAnalysis;
 import com.project.kmitl57.beelife.DataForAnalysis;
 import com.project.kmitl57.beelife.DayOfWeekDataAnalysis;
+import com.project.kmitl57.beelife.ImportantDataAnalysis;
 import com.project.kmitl57.beelife.KMean;
 import com.project.kmitl57.beelife.ProfileFriend;
 import com.project.kmitl57.beelife.ProfilePage;
@@ -83,6 +84,8 @@ public class MainActivity4 extends AppCompatActivity {
     public static DataForAnalysis mDbDataForAnalysis_Model;
     private DayOfWeekDataAnalysis mDbDayOfWeekAnalysis;
     public static DayOfWeekDataAnalysis mDbDayOfWeekAnalysis_Model;
+    private ImportantDataAnalysis mDbImportantAnalysis;
+    public static ImportantDataAnalysis mDbImportantAnalysis_Model;
     private  KMean mDbKmean;
     public static KMean mDbKmean_Model;
     private ShareDatabase SHR;
@@ -108,6 +111,7 @@ public class MainActivity4 extends AppCompatActivity {
     public static CustomDialogClass cdd;
     public static ArrayList<DataAnalysis> ResultSuggest;
     public static ArrayList<DataAnalysis> ResultDayOfWeek;
+    public static ArrayList<DataAnalysis> ResultImportant;
     public int doublecheck=0;
     public static String User; //Simson
     public static int User_ID; //1549
@@ -168,6 +172,7 @@ public class MainActivity4 extends AppCompatActivity {
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         ResultSuggest=new ArrayList<>();
         ResultDayOfWeek=new ArrayList<>();
+        ResultImportant=new ArrayList<>();
         ListRequest=new ArrayList<>();
         FriendsRequest=new ArrayList<>();
         all_history_map=new ArrayList<>();
@@ -237,6 +242,10 @@ public class MainActivity4 extends AppCompatActivity {
         mDbDayOfWeekAnalysis = new DayOfWeekDataAnalysis(getApplicationContext());
         mDbDayOfWeekAnalysis.open();
         mDbDayOfWeekAnalysis_Model=mDbDayOfWeekAnalysis;
+
+        mDbImportantAnalysis = new ImportantDataAnalysis(getApplicationContext());
+        mDbImportantAnalysis.open();
+        mDbImportantAnalysis_Model=mDbImportantAnalysis;
 
         mDbKmean = new KMean(getApplicationContext());
         mDbKmean.open();
@@ -415,14 +424,15 @@ public class MainActivity4 extends AppCompatActivity {
                     ArrayList<DataAnalysis> dataAnalyses = mDbKmean.GetShow();
                     ResultSuggest=dataAnalyses;
                 }
-                try{
-                    ResultDayOfWeek.clear();
-                    if(mDbDayOfWeekAnalysis.GetNumberDatabase()>0){
-                        ArrayList<DataAnalysis> dataAnalysis = mDbDayOfWeekAnalysis.GetMaxDayOfWeek(getIntDayOfWeek(listdate));
-                        ResultDayOfWeek=dataAnalysis;
-                    }
-                }catch (NullPointerException e){
-
+                ResultDayOfWeek.clear();
+                if(mDbDayOfWeekAnalysis.GetNumberDatabase()>0){
+                    ArrayList<DataAnalysis> dataAnalysis = mDbDayOfWeekAnalysis.GetMaxDayOfWeek(getIntDayOfWeek(listdate));
+                    ResultDayOfWeek=dataAnalysis;
+                }
+                ResultImportant.clear();
+                if(mDbImportantAnalysis.GetNumberDatabase()>0){
+                    ArrayList<DataAnalysis> dataAnalysis = mDbImportantAnalysis.GetImportant();
+                    ResultImportant=dataAnalysis;
                 }
 
                 CustomDialogClass cdc = new CustomDialogClass(MainActivity4.this,null);
@@ -993,16 +1003,21 @@ public class MainActivity4 extends AppCompatActivity {
         if(MainActivity4.mDbDataForAnalysis_Model.GetNumberDatabase()>5||MainActivity4.mDbDayOfWeekAnalysis_Model.GetNumberDatabase()>5){
             if(listdate == dateNow){ //select now date in calendar
                 choice=ResultSuggest;
-                for(int i=0;i<choice.size();i++){
-                    if(choice.get(i).getTimeAct() < timeNow){
-                        choice.remove(i); //remove past suggest activity
+                for(int i=0;i<choice.size();i++) {
+                    for (int j = 0; j < choice.size(); j++) {
+                        if (choice.get(j).getTimeAct() < timeNow) {
+                            choice.remove(j); //remove past suggest activity
+                        }
                     }
                 }
             }else if(listdate>dateNow){ //if select future date
                 //Calculate DayOfWeek
                 choice=ResultDayOfWeek;
+                for(int i=0;i<ResultImportant.size();i++){
+                    choice.add(ResultImportant.get(i));
+                }
             }
-            //choice=ResultSuggest;
+
             for(int i=0;i<choice.size();i++){
                 for(int j=0;j<choice.size()-1;j++){
                     if(choice.get(j).getFrequency()>choice.get(j+1).getFrequency()){
@@ -1326,14 +1341,14 @@ public class MainActivity4 extends AppCompatActivity {
         String[] dates = new String[] { "SUNDAY", "MONDAY", "TUESDAY", //
                 "WEDNESDAY", "THURSDAY", "FRIDAY", "SATURDAY" };
         int day = listdate/10000;
-        int month = listdate/100;
-        int year = listdate-(month*100);
+        int month = (listdate/100)-(day*100);
+        int year = listdate-((listdate/100)*100)+2000;
         Calendar cal = Calendar.getInstance();
         cal.set(year, //
                 month - 1, // <-- add -1
                 day);
         int date_of_week = cal.get(Calendar.DAY_OF_WEEK);
-        return date_of_week - 1;
+        return date_of_week;
     }
 
     @Override

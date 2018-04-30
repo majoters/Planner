@@ -41,6 +41,7 @@ import devs.mulham.raee.sample.MainActivity4;
 import devs.mulham.raee.sample.ShareType;
 
 public class MainActivity extends AppCompatActivity {
+    private FirebaseAuth auth;
     private DatabaseReference mDatabase;
     public String User;
     public ArrayList<String> User2;
@@ -80,11 +81,13 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(MainActivity.this, MainActivity4.class));
             }
         });
-
+        //get firebase auth instance
+        auth = FirebaseAuth.getInstance();
         result = (ListView)findViewById(R.id.result);
         Search=findViewById(R.id.editText);
 
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        final FirebaseDatabase database = FirebaseDatabase.getInstance();
+        firebaseDatabase = FirebaseDatabase.getInstance();
 
 
         DataPost=new ArrayList<>();

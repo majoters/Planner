@@ -15,6 +15,7 @@ public class List_Database {
     private double longitude;
     private int share;
     private int arrive;
+    public int important;
 
     public int getID() {
         return ID;
@@ -61,6 +62,28 @@ public class List_Database {
         this.longitude=longitude;
         setStatus(share);
         this.arrive = arrive;
+    }
+    public List_Database(int Date,int Time,String Description,String locationName,double latitude,double longitude,int share,boolean arrive,boolean important){
+        this.Date=Date;
+        this.Time=Time;
+        this.Description=Description;
+        this.locationName=locationName;
+        this.latitude=latitude;
+        this.longitude=longitude;
+        setStatus(share);
+        this.arrive = arrive? 1 : 0;
+        this.important = important? 1 : 0;
+    }
+    public List_Database(int Date,int Time,String Description,String locationName,double latitude,double longitude,int share,int arrive,int important){
+        this.Date=Date;
+        this.Time=Time;
+        this.Description=Description;
+        this.locationName=locationName;
+        this.latitude=latitude;
+        this.longitude=longitude;
+        setStatus(share);
+        this.arrive = arrive;
+        this.important = important;
     }
 
     public int getStatus() {
@@ -111,8 +134,23 @@ public class List_Database {
         boolean result = (arrive != 0);
         return result;
     }
+    public int getIntArrive() {
+        return arrive;
+    }
 
     public void setArrive(boolean arrive) {
         this.arrive = arrive? 1 : 0;
+    }
+
+    public boolean getImportant() {
+        boolean result = (important != 0);
+        return result;
+    }
+    public int getIntImportant() {
+        return important;
+    }
+
+    public void setImportant(boolean important) {
+        this.important = important? 1 : 0;
     }
 }
