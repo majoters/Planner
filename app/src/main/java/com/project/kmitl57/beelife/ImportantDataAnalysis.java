@@ -37,6 +37,7 @@ public class ImportantDataAnalysis {
     private static final String tag = "ImportantFrequency";
 
     public static int frequency;
+    public static int id;
 
     private DatabaseHelper mDbHelper;
     private SQLiteDatabase mDb;
@@ -84,13 +85,14 @@ public class ImportantDataAnalysis {
         values.put(COL_IMPORTANT,list_database.getImportant());
         values.put(COL_ARRIVE,list_database.getArrive());
         frequency = checkiterate(list_database);
+        int n = frequency+1;
         if(frequency==0){
             values.put(COL_FREQ,1);
             mDb.insert(TABLE_NAME,null,values);
         }
         else {
-            int ID = MainActivity4.SearchIndex(list_database);
-            values.put(COL_FREQ,frequency+1);
+            int ID = id;
+            values.put(COL_FREQ,n);
             mDb.update(TABLE_NAME, values,
                     COL_ID + "=?",
                     new String[]{String.valueOf(ID)});
@@ -115,13 +117,14 @@ public class ImportantDataAnalysis {
             cursor.moveToFirst();
             while(!cursor.isAfterLast()){
                 if(cursor.getInt(INDEX_TIMEACT)==list_database.getTime() &&
-                        cursor.getString(INDEX_DESCRIPTION).compareTo(list_database.getDescription())==0&&
-                        cursor.getString(INDEX_LOCATION).compareTo(list_database.getLocationName())==0&&
+                        cursor.getString(INDEX_DESCRIPTION).equals(list_database.getDescription())&&
+                        cursor.getString(INDEX_LOCATION).equals(list_database.getLocationName())&&
                         cursor.getDouble(INDEX_LATITUDE)==list_database.getLatitude()&&
                         cursor.getDouble(INDEX_LONGITUDE)==list_database.getLongitude()&&
                         cursor.getInt(INDEX_IMPORTANT)==list_database.getIntImportant()&&
                         cursor.getInt(INDEX_ARRIVE)==list_database.getIntArrive()){
                     int n=cursor.getInt(INDEX_FREQ);
+                    id=cursor.getInt(INDEX_ID);
                     cursor.close();
                     return n;
                 }

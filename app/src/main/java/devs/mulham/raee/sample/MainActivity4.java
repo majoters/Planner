@@ -1071,7 +1071,7 @@ public class MainActivity4 extends AppCompatActivity {
 
             for(int i=0;i<choice.size();i++){
                 for(int j=0;j<choice.size()-1;j++){
-                    if(choice.get(j).getFrequency()>choice.get(j+1).getFrequency()){
+                    if(choice.get(j).getFrequency()<choice.get(j+1).getFrequency()){
                         DataAnalysis swap=choice.get(j);
                         choice.set(j,choice.get(j+1));
                         choice.set(j+1,swap);

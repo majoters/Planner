@@ -47,6 +47,9 @@ public class DataForAnalysis {
 
     private static final String tag = "DataForAnalysis";
 
+    public static int frequency;
+    public static int id;
+
     private DatabaseHelper mDbHelper;
     private SQLiteDatabase mDb;
 
@@ -92,15 +95,16 @@ public class DataForAnalysis {
         values.put(COL_LOCATION,list_database.getLocationName());
         values.put(COL_LATITUDE,list_database.getLatitude());
         values.put(COL_LONGITUDE,list_database.getLongitude());
-        int n = checkiterate(list_database,Time);
-        if(n==0){
+       frequency = checkiterate(list_database,Time);
+       int n = frequency+1;
+        if(frequency==0){
             values.put(COL_FREQ,1);
             values.put(COL_GROUP,CalculateKmean(list_database));
             mDb.insert(TABLE_NAME,null,values);
         }
         else {
-            int ID = MainActivity4.SearchIndex(list_database);
-            values.put(COL_FREQ,n+1);
+            int ID = id;
+            values.put(COL_FREQ,n);
             values.put(COL_GROUP,CalculateKmean(list_database));
             mDb.update(TABLE_NAME, values,
                     COL_ID + "=?",
@@ -181,11 +185,12 @@ public class DataForAnalysis {
             while(!cursor.isAfterLast()){
                 if(cursor.getInt(INDEX_TIME)==time &&
                         cursor.getInt(INDEX_TIMEACT)==list_database.getTime() &&
-                        cursor.getString(INDEX_DESCRIPTION).compareTo(list_database.getDescription())==0&&
-                        cursor.getString(INDEX_LOCATION).compareTo(list_database.getLocationName())==0&&
+                        cursor.getString(INDEX_DESCRIPTION).equals(list_database.getDescription())&&
+                        cursor.getString(INDEX_LOCATION).equals(list_database.getLocationName())&&
                         cursor.getDouble(INDEX_LATITUDE)==list_database.getLatitude()&&
                         cursor.getDouble(INDEX_LONGITUDE)==list_database.getLongitude()){
                     int n=cursor.getInt(INDEX_FREQ);
+                    id=cursor.getInt(INDEX_ID);
                     cursor.close();
                     return n;
                 }
