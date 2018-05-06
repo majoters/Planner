@@ -132,7 +132,8 @@
 
         <activity
             android:name="com.example.Update_23_04_61.PublicZone"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="adjustPan"/>
 
         <receiver
             android:name="com.example.supakorn.notification_morning.AlarmNotification"
@@ -167,7 +168,7 @@
         <activity android:name="com.example.hotmildc.shareact.FriendsRequest" />
         <activity android:name="com.example.hotmildc.shareact.ShowListFriends" />
         <activity android:name="com.example.hotmildc.shareact.ListShare" />
-        <activity android:name="devs.mulham.raee.sample.NamePlace" />
+        <!--<activity android:name="devs.mulham.raee.sample.NamePlace" />-->
         <activity
             android:name=".ProfileFriend"
             android:theme="@style/AppTheme.NoActionBar" />

@@ -103,10 +103,11 @@ public class ShowDelete extends Dialog implements View.OnClickListener{
                         MainActivity4.ActivityLocation.remove(position); //
                         MainActivity4.ActivityOld.remove(position);
                         MainActivity4.ActivityArrive.remove(position);
+                        MainActivity4.ActivityImportant.remove(position);
 
                         cancel();
                         final CustomListView adapter = new CustomListView(MainActivity4.context,
-                                MainActivity4.ActivityTime,ActivityName,ActivityLocation,MainActivity4.ActivityOld,MainActivity4.ActivityArrive);
+                                MainActivity4.ActivityTime,ActivityName,ActivityLocation,MainActivity4.ActivityOld,MainActivity4.ActivityArrive,MainActivity4.ActivityImportant);
                         MainActivity4.listView.setAdapter(adapter);
                         MainActivity4.listView.invalidate();
 

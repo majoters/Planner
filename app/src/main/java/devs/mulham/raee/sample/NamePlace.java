@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
@@ -31,6 +32,9 @@ public class NamePlace extends Dialog implements android.view.View.OnClickListen
     public Button place_ok;
     public static double latitude;
     public static double longitude;
+    private String place_name2;
+    private static double latitude2;
+    private static double longitude2;
     public Context mCx;
 
     public NamePlace(@NonNull Context context) {
@@ -146,6 +150,95 @@ public class NamePlace extends Dialog implements android.view.View.OnClickListen
             }
         });
 
+    }
+    public void getMap(String place_name,double latitude,double longitude){
+        place_name2=place_name;
+        latitude2=latitude;
+        longitude2=longitude;
+        NearPlaceType nearPlaceType = new NearPlaceType(place_name2,
+                latitude2,longitude2);
+        MainActivity4.location = new Place() {
+            @Override
+            public String getId() {
+                return null;
+            }
+
+            @Override
+            public List<Integer> getPlaceTypes() {
+                return null;
+            }
+
+            @Override
+            public CharSequence getAddress() {
+                return null;
+            }
+
+            @Override
+            public Locale getLocale() {
+                return null;
+            }
+
+            @Override
+            public CharSequence getName() {
+                return place_name2;
+            }
+
+            @Override
+            public LatLng getLatLng() {
+                return new LatLng(latitude2,longitude2);
+            }
+
+            @Override
+            public LatLngBounds getViewport() {
+                return null;
+            }
+
+            @Override
+            public Uri getWebsiteUri() {
+                return null;
+            }
+
+            @Override
+            public CharSequence getPhoneNumber() {
+                return null;
+            }
+
+            @Override
+            public float getRating() {
+                return 0;
+            }
+
+            @Override
+            public int getPriceLevel() {
+                return 0;
+            }
+
+            @Override
+            public CharSequence getAttributions() {
+                return null;
+            }
+
+            @Override
+            public Place freeze() {
+                return null;
+            }
+
+            @Override
+            public boolean isDataValid() {
+                return false;
+            }
+        };
+        if(!isInMap(nearPlaceType)){
+            MainActivity4.mDbMapDatabase_clone.createMapDatabase(nearPlaceType);
+            MainActivity4.RefreshMapHistory();
+            Toast.makeText(mCx,"Create Map List",Toast.LENGTH_SHORT).show();
+            //MainActivity4.cdd.locate.setText(place_name2);
+        }else {
+            MainActivity4.mDbMapDatabase_clone.UpdateList(nearPlaceType);
+            MainActivity4.RefreshMapHistory();
+            Toast.makeText(mCx,"Update Map List",Toast.LENGTH_SHORT).show();
+            //MainActivity4.cdd.locate.setText(place_name2);
+        }
     }
 
     @Override

@@ -151,7 +151,7 @@ public class ActivityDbAdapter {
         values.put(COL_LONGITUDE,list_database.getLongitude());
         values.put(COL_SHARE,list_database.getStatus());
         values.put(COL_IMPORTANT,list_database.getImportant());
-        values.put(COL_ARRIVE,list_database.getStatus());
+        values.put(COL_ARRIVE,list_database.getArrive());
 
         mDb.update(TABLE_NAME, values,
                 COL_ID + "=?",

@@ -31,7 +31,9 @@ public class CustomListView extends BaseAdapter {
     private ArrayList<String> loc = new ArrayList<>();
     private ArrayList<Boolean> overtime = new ArrayList<>();
     private ArrayList<Boolean> Arrive = new ArrayList<>();
+    private ArrayList<Boolean> Important = new ArrayList<>();
     private ImageView imgArrive;
+    private ImageView imgStar;
     Context mContext;
     public CustomListView(Context context, ArrayList<String> t, ArrayList<String> a, ArrayList<String> l){
         this.time=t;
@@ -55,6 +57,16 @@ public class CustomListView extends BaseAdapter {
         this.mContext= context;
         this.overtime = overtime;
         this.Arrive = Arrive;
+    }
+    public CustomListView(Context context, ArrayList<String> t,
+                          ArrayList<String> a, ArrayList<String> l,ArrayList<Boolean> overtime,ArrayList<Boolean> Arrive,ArrayList<Boolean> Important){
+        this.time=t;
+        this.act=a;
+        this.loc=l;
+        this.mContext= context;
+        this.overtime = overtime;
+        this.Arrive = Arrive;
+        this.Important = Important;
     }
 
     @Override
@@ -85,28 +97,32 @@ public class CustomListView extends BaseAdapter {
         if (view == null) {
             view = mInflater.inflate(R.layout.activity_block, parent, false);
             imgArrive = (ImageView) view.findViewById(R.id.forgot);
+            imgStar = (ImageView)view.findViewById(R.id.star);
         }
         if (overtime.get(position) == true) {
             view.findViewById(R.id.constraintLayout4).setBackgroundColor(Color.rgb(192, 192, 192));
             //ImageView imgArrive = (ImageView) view.findViewById(R.id.forgot);
             Log.d("overtime(true)", String.valueOf(overtime.get(position)));
-            //workdone = false
             if (Arrive.get(position) == false) {
                 //view.findViewById(R.id.forgot).startAnimation(animation);
                 //imgArrive.setBackgroundColor(Color.rgb(255, 191, 5));
                 view.findViewById(R.id.constraintLayout4).setBackgroundColor(Color.rgb(192, 192, 192));
                 imgArrive.findViewById(R.id.forgot).startAnimation(animation);
                 Log.d("Arrive", String.valueOf(Arrive.get(position)));
-            } else {
+            } else if(Arrive.get(position) == true) {
                 //view.findViewById(R.id.forgot).setVisibility(View.GONE);
                 imgArrive.findViewById(R.id.forgot).setVisibility(View.GONE);
                 Log.d("Arrive", String.valueOf(Arrive.get(position)));
             }
-        } else {
-            //view.findViewById(R.id.constraintLayout4).setBackgroundColor(Color.rgb(255, 191, 5));
-            //view.findViewById(R.id.forgot).setVisibility(View.GONE);
+        } else if (overtime.get(position) == false) {
             imgArrive.findViewById(R.id.forgot).setVisibility(View.GONE);
             Log.d("overtime(false)", String.valueOf(overtime.get(position)));
+        }
+        if(Important.get(position) == true){
+            imgStar.findViewById(R.id.star).setVisibility(View.VISIBLE);
+        }
+        else if(Important.get(position) == false){
+            imgStar.findViewById(R.id.star).setVisibility(View.GONE);
         }
         try {
             TextView textTime = (TextView) view.findViewById(R.id.textTime);

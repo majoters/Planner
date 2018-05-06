@@ -19,8 +19,7 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimary"
-            app:popupTheme="@style/AppTheme.PopupOverlay">
-        </android.support.v7.widget.Toolbar>
+            app:popupTheme="@style/AppTheme.PopupOverlay"></android.support.v7.widget.Toolbar>
 
     </android.support.design.widget.AppBarLayout>
 
@@ -77,39 +76,31 @@
         android:id="@+id/textView24"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="center"
+        android:paddingVertical="10dp"
         android:text="Public-activity zone"
         android:textAllCaps="true"
         android:textColor="@color/black"
-        android:textStyle="bold"
         android:textSize="20dp"
-        android:gravity="center"
-        android:paddingVertical="10dp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout15" />
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recycler_view"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:background="@color/iron"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView24">
-
-    </android.support.v7.widget.RecyclerView>
-
     <android.support.constraint.ConstraintLayout
         android:id="@+id/nf"
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="313dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="24dp"
         android:background="@color/accent"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="@+id/result"
+        app:layout_constraintBottom_toBottomOf="@+id/recycler_view"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/result">
+        app:layout_constraintTop_toTopOf="@+id/swipeCardView">
 
         <ImageView
             android:id="@+id/no_status"
@@ -130,15 +121,52 @@
             android:id="@+id/noResult"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="32dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="1dp"
             android:text="No searching"
+            android:textAlignment="center"
             android:textAllCaps="true"
             android:textColor="@color/black"
             android:textSize="25dp"
             android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="@+id/imageView6"
-            app:layout_constraintStart_toStartOf="@+id/imageView6"
-            app:layout_constraintTop_toBottomOf="@+id/imageView6" />
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/no_status" />
 
     </android.support.constraint.ConstraintLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler_view"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@color/iron"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView24">
+
+    </android.support.v7.widget.RecyclerView>
+
+    <com.huxq17.swipecardsview.SwipeCardsView
+        android:id="@+id/swipeCardView"
+        android:layout_width="wrap_content"
+        android:layout_height="435dp"
+        android:background="#f3f3f3"
+        android:isScrollContainer="false"
+        app:alphaOffsetStep="20"
+        app:layout_constraintBottom_toBottomOf="@+id/recycler_view"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView24"
+        app:layout_constraintVertical_bias="0.0"
+        app:scaleOffsetStep="0.08"
+        app:yOffsetStep="20dp"
+        tools:ignore="MissingConstraints">
+
+    </com.huxq17.swipecardsview.SwipeCardsView>
 
 </android.support.constraint.ConstraintLayout>

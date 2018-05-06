@@ -20,11 +20,13 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.huxq17.swipecardsview.SwipeCardsView;
 import com.project.kmitl57.beelife.CustomSearch;
 import com.project.kmitl57.beelife.R;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import devs.mulham.raee.sample.List_Database;
 import devs.mulham.raee.sample.MainActivity4;
@@ -43,6 +45,11 @@ public class PublicZone extends AppCompatActivity {
     public static String Username_search,ID_search;
     public boolean found = false;
     public String User_Daily,ID_Daily;
+    private SwipeCardsView swipeCardsView;
+    private SwipeCardsView swipeCardsViewFirst;
+    private TextView textNoStatus;
+    private ImageView imgNoStatus;
+    private RecyclerView mRecyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,7 +70,13 @@ public class PublicZone extends AppCompatActivity {
                 startActivity(new Intent(PublicZone.this, MainActivity4.class));
             }
         });
+        mRecyclerView = (RecyclerView) findViewById(R.id.recycler_view);
+        swipeCardsView = (SwipeCardsView)findViewById(R.id.swipeCardView);
+        swipeCardsView.retainLastCard(false);
+        swipeCardsView.enableSwipe(true);
         Search=findViewById(R.id.editText);
+        textNoStatus = (TextView)findViewById(R.id.noResult);
+        imgNoStatus = (ImageView)findViewById(R.id.no_status);
 
         FirebaseDatabase database = FirebaseDatabase.getInstance();
 
@@ -71,6 +84,14 @@ public class PublicZone extends AppCompatActivity {
         DataPost=new ArrayList<>();
         DataShare=new ArrayList<>();
 
+        if(DataPost.isEmpty()&&DataPost.isEmpty()){
+            imgNoStatus.setVisibility(View.VISIBLE);
+            textNoStatus.setVisibility(View.VISIBLE);
+        }
+        else{
+            imgNoStatus.setVisibility(View.GONE);
+            textNoStatus.setVisibility(View.GONE);
+        }
         findViewById(R.id.button4).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -122,6 +143,10 @@ public class PublicZone extends AppCompatActivity {
                                                     DataShare.add(shareType);
 
                                                 }
+                                                else if(date_post<date_compare){
+                                                    Log.d("getRef", String.valueOf(ds.getRef()));
+                                                    ds.getRef().setValue(null);
+                                                }
                                             }catch (NullPointerException e){
 
                                             }
@@ -132,12 +157,13 @@ public class PublicZone extends AppCompatActivity {
                                         result.setAdapter(adapter);
                                         result.invalidate();*/
 
-                                        final RecyclerView mRecyclerView = (RecyclerView) findViewById(R.id.recycler_view);
+                                        //final RecyclerView mRecyclerView = (RecyclerView) findViewById(R.id.recycler_view);
                                         mRecyclerView.setHasFixedSize(true);
                                         final LinearLayoutManager mLayoutManager = new LinearLayoutManager(PublicZone.this,LinearLayoutManager.HORIZONTAL,false);
                                         mRecyclerView.setLayoutManager(mLayoutManager);
                                         final PublicZoneAdapter mAdapter = new PublicZoneAdapter(PublicZone.this,DataPost,DataShare,Integer.parseInt(ID_search),Username_search);
                                         mRecyclerView.setAdapter(mAdapter);
+                                        swipeCardsView.setVisibility(View.GONE);
                                         found = false;
                                     }
 
@@ -201,6 +227,10 @@ public class PublicZone extends AppCompatActivity {
                                         DataShare.add(shareType);
 
                                     }
+                                    else if(date_post<date_compare){
+                                        Log.d("getRef", String.valueOf(ds.getRef()));
+                                        ds.getRef().setValue(null);
+                                    }
                                 }catch (NullPointerException e){
 
                                 }
@@ -215,8 +245,12 @@ public class PublicZone extends AppCompatActivity {
                             mRecyclerView.setHasFixedSize(true);
                             final LinearLayoutManager mLayoutManager = new LinearLayoutManager(PublicZone.this,LinearLayoutManager.HORIZONTAL,false);
                             mRecyclerView.setLayoutManager(mLayoutManager);
-                            final PublicZoneAdapter mAdapter = new PublicZoneAdapter(PublicZone.this,DataPost,DataShare,Integer.parseInt(ID_Daily),User_Daily);
-                            mRecyclerView.setAdapter(mAdapter);
+                            //final PublicZoneAdapter mAdapter = new PublicZoneAdapter(PublicZone.this,DataPost,DataShare,Integer.parseInt(ID_Daily),User_Daily);
+                            //mRecyclerView.setAdapter(mAdapter);
+                            final SwipeCardsAdapter mAdapter = new SwipeCardsAdapter(PublicZone.this,DataPost,DataShare,Integer.parseInt(ID_Daily),User_Daily);
+                            swipeCardsView.setAdapter(mAdapter);
+                            swipeCardsView.retainLastCard(false);
+                            swipeCardsView.enableSwipe(true);
                         }
 
                         @Override

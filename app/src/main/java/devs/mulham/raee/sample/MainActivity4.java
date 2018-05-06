@@ -20,6 +20,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -97,6 +98,7 @@ public class MainActivity4 extends AppCompatActivity {
     public static ArrayList<String> ActivityLocation = new ArrayList<>();
     public static ArrayList<Boolean> ActivityOld = new ArrayList<>();
     public static ArrayList<Boolean> ActivityArrive = new ArrayList<>();
+    public static ArrayList<Boolean> ActivityImportant = new ArrayList<>();
     public static ArrayList<List_Database> values_filter = new ArrayList<>();
     public static ArrayList<List_Database> databases = new ArrayList<>();
     public  static int listdate ;
@@ -143,6 +145,7 @@ public class MainActivity4 extends AppCompatActivity {
     public static int id_checking;
     public static ArrayList<FriendListType> friendList;
     public static ArrayList<FriendListType> allUsers;
+    public DrawerLayout drawer;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -205,7 +208,7 @@ public class MainActivity4 extends AppCompatActivity {
                         setupBadge2();
                     }
                 }).run();
-                handler.postDelayed(this,1000);
+                handler.postDelayed(this,500);
             }
         };
 
@@ -225,7 +228,7 @@ public class MainActivity4 extends AppCompatActivity {
         defaultDate.add(Calendar.MONTH, -1);
         defaultDate.add(Calendar.DAY_OF_WEEK, +5);
 
-        final CustomListView adapter = new CustomListView(getApplicationContext(),ActivityTime,ActivityName,ActivityLocation,ActivityOld,ActivityArrive);
+        final CustomListView adapter = new CustomListView(getApplicationContext(),ActivityTime,ActivityName,ActivityLocation,ActivityOld,ActivityArrive,ActivityImportant);
         listView.setAdapter(adapter);
 
 
@@ -351,6 +354,7 @@ public class MainActivity4 extends AppCompatActivity {
                 ActivityTime.clear();
                 ActivityOld.clear();
                 ActivityArrive.clear();
+                ActivityImportant.clear();
 
                 if(mDbAdapter.fecthAllList()!=null){
                     databases=mDbAdapter.fecthAllList();
@@ -402,10 +406,11 @@ public class MainActivity4 extends AppCompatActivity {
                     ActivityLocation.add(values_filter.get(i).getLocationName());
                     ActivityOld.add(oldtime);
                     ActivityArrive.add(values_filter.get(i).getArrive());
+                    ActivityImportant.add(values_filter.get(i).getImportant());
                     Log.d("ArriveValue",String.valueOf(values_filter.get(i).getArrive()));
                 }
 
-                final CustomListView adapter = new CustomListView(getApplicationContext(),ActivityTime,ActivityName,ActivityLocation,ActivityOld,ActivityArrive);
+                final CustomListView adapter = new CustomListView(getApplicationContext(),ActivityTime,ActivityName,ActivityLocation,ActivityOld,ActivityArrive,ActivityImportant);
                 // Save the ListView state (= includes scroll position) as a Parceble
                 Parcelable state = listView.onSaveInstanceState();
                 // e.g. set new items
@@ -420,24 +425,45 @@ public class MainActivity4 extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 ResultSuggest.clear();
+                ResultDayOfWeek.clear();
+                ResultImportant.clear();
                 if(mDbKmean.GetAll().size()>0){
                     ArrayList<DataAnalysis> dataAnalyses = mDbKmean.GetShow();
                     ResultSuggest=dataAnalyses;
                 }
-                ResultDayOfWeek.clear();
                 if(mDbDayOfWeekAnalysis.GetNumberDatabase()>0){
                     ArrayList<DataAnalysis> dataAnalysis = mDbDayOfWeekAnalysis.GetMaxDayOfWeek(getIntDayOfWeek(listdate));
                     ResultDayOfWeek=dataAnalysis;
                 }
-                ResultImportant.clear();
                 if(mDbImportantAnalysis.GetNumberDatabase()>0){
                     ArrayList<DataAnalysis> dataAnalysis = mDbImportantAnalysis.GetImportant();
                     ResultImportant=dataAnalysis;
                 }
+                //drawer.openDrawer(GravityCompat.END);
+                drawer.setDrawerListener(new DrawerLayout.DrawerListener() {
+                    @Override
+                    public void onDrawerSlide(View view, float v) {
 
+                    }
+
+                    @Override
+                    public void onDrawerOpened(View view) {
+
+                    }
+
+                    @Override
+                    public void onDrawerClosed(View view) {
+                        //CustomDialogClass cdc = new CustomDialogClass(MainActivity4.this,null);
+                        //cdc.show();
+                    }
+
+                    @Override
+                    public void onDrawerStateChanged(int i) {
+
+                    }
+                });
                 CustomDialogClass cdc = new CustomDialogClass(MainActivity4.this,null);
                 cdc.show();
-
 
             }
         });
@@ -629,7 +655,8 @@ public class MainActivity4 extends AppCompatActivity {
             }
         });
 
-        final DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        //ActionBarDrawerToggle toggle
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
@@ -644,6 +671,10 @@ public class MainActivity4 extends AppCompatActivity {
         suggest.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                //new
+                NamePlace place = new NamePlace(context);
+                place.getMap(choice.get(i).getLocationName(),choice.get(i).getLatitude(),choice.get(i).getLongitude());
+                //
                 List_Database list_database = new List_Database(listdate,choice.get(i).getTime(),choice.get(i).getDescription(),choice.get(i).getLocationName(),choice.get(i).getLatitude(),choice.get(i).getLongitude(),0);
                 CustomDialogClass ccd = new CustomDialogClass(MainActivity4.this,list_database);
                 ccd.suggest=true;
@@ -654,8 +685,11 @@ public class MainActivity4 extends AppCompatActivity {
         recent.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                //new
+                NamePlace place = new NamePlace(context);
+                place.getMap(historical.get(i).getLocationName(),historical.get(i).getLatitude(),historical.get(i).getLongitude());
+                //
                 List_Database list_database = new List_Database(listdate,historical.get(i).getTime(),historical.get(i).getDescription(),historical.get(i).getLocationName(),historical.get(i).getLatitude(),historical.get(i).getLongitude(),0);
-
                 CustomDialogClass ccd = new CustomDialogClass(MainActivity4.this,list_database);
                 ccd.suggest=true;
                 ccd.show();
@@ -980,10 +1014,11 @@ public class MainActivity4 extends AppCompatActivity {
             ActivityLocation.add(values_filter.get(i).getLocationName());
             ActivityOld.add(oldtime);
             ActivityArrive.add(values_filter.get(i).getArrive());
+            ActivityImportant.add(values_filter.get(i).getImportant());
             Log.d("ArriveValue",String.valueOf(values_filter.get(i).getArrive()));
         }
 
-        final CustomListView adapter = new CustomListView(MainActivity4.context,ActivityTime,ActivityName,ActivityLocation,ActivityOld,ActivityArrive);
+        final CustomListView adapter = new CustomListView(MainActivity4.context,ActivityTime,ActivityName,ActivityLocation,ActivityOld,ActivityArrive,ActivityImportant);
         // Save the ListView state (= includes scroll position) as a Parceble
         Parcelable state = listView.onSaveInstanceState();
         // e.g. set new items
@@ -1000,7 +1035,7 @@ public class MainActivity4 extends AppCompatActivity {
         Date date = new Date();
         int dateNow = date.getDate()*10000+(date.getMonth()+1)*100+ date.getYear()%100;
         int timeNow = date.getHours()*100+(date.getMinutes());
-        if(MainActivity4.mDbDataForAnalysis_Model.GetNumberDatabase()>5||MainActivity4.mDbDayOfWeekAnalysis_Model.GetNumberDatabase()>5){
+        if(MainActivity4.mDbDataForAnalysis_Model.GetNumberDatabase()>5||MainActivity4.mDbDayOfWeekAnalysis_Model.GetNumberDatabase()>3||MainActivity4.mDbImportantAnalysis_Model.GetNumberDatabase()>3){
             if(listdate == dateNow){ //select now date in calendar
                 choice=ResultSuggest;
                 for(int i=0;i<choice.size();i++) {
@@ -1015,6 +1050,22 @@ public class MainActivity4 extends AppCompatActivity {
                 choice=ResultDayOfWeek;
                 for(int i=0;i<ResultImportant.size();i++){
                     choice.add(ResultImportant.get(i));
+                }
+                for(int k=0;k<choice.size();k++) {
+                    for (int l = 0; l < choice.size()-1; l++) {
+                        if (choice.get(l).getFrequency() == choice.get(l+1).getFrequency()) {
+                            if(choice.get(l).getTimeAct() == choice.get(l+1).getTimeAct()){
+                                if(choice.get(l).getDescription()==choice.get(l+1).getDescription()){
+                                    if(choice.get(l).getLocationName()==choice.get(l+1).getLocationName()){
+                                        if((choice.get(l).getArrive() == choice.get(l+1).getArrive()) && (choice.get(l).getImportant() == choice.get(l+1).getImportant())){
+                                            choice.remove(l);
+                                        }
+
+                                    }
+                                }
+                            }
+                       }
+                    }
                 }
             }
 

@@ -92,16 +92,23 @@ public class DataForAnalysis {
         values.put(COL_LOCATION,list_database.getLocationName());
         values.put(COL_LATITUDE,list_database.getLatitude());
         values.put(COL_LONGITUDE,list_database.getLongitude());
-        if(checkiterate(list_database,Time)==0){
+        int n = checkiterate(list_database,Time);
+        if(n==0){
             values.put(COL_FREQ,1);
+            values.put(COL_GROUP,CalculateKmean(list_database));
+            mDb.insert(TABLE_NAME,null,values);
         }
         else {
-            values.put(COL_FREQ,checkiterate(list_database,Time)+1);
+            int ID = MainActivity4.SearchIndex(list_database);
+            values.put(COL_FREQ,n+1);
+            values.put(COL_GROUP,CalculateKmean(list_database));
+            mDb.update(TABLE_NAME, values,
+                    COL_ID + "=?",
+                    new String[]{String.valueOf(ID)});
         }
-        values.put(COL_GROUP,CalculateKmean(list_database));
         //values.put(COL_GROUP,CalculateKnear(list_database));
 
-        mDb.insert(TABLE_NAME,null,values);
+        //mDb.insert(TABLE_NAME,null,values);
     }
 
     public int CalculateKmean(List_Database list_database){

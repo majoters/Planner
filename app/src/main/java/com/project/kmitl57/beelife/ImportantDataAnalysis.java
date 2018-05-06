@@ -43,7 +43,7 @@ public class ImportantDataAnalysis {
 
     private static final String DATABASE_NAME="ImportantFrequency";
     private static final String TABLE_NAME="Data";
-    private static final int DATABASE_VERSION=1;
+    private static final int DATABASE_VERSION=2;
 
     private final Context mContext;
 
@@ -86,12 +86,17 @@ public class ImportantDataAnalysis {
         frequency = checkiterate(list_database);
         if(frequency==0){
             values.put(COL_FREQ,1);
+            mDb.insert(TABLE_NAME,null,values);
         }
         else {
+            int ID = MainActivity4.SearchIndex(list_database);
             values.put(COL_FREQ,frequency+1);
+            mDb.update(TABLE_NAME, values,
+                    COL_ID + "=?",
+                    new String[]{String.valueOf(ID)});
         }
 
-        mDb.insert(TABLE_NAME,null,values);
+        //mDb.insert(TABLE_NAME,null,values);
     }
 
     private int checkiterate(List_Database list_database) {
@@ -160,10 +165,10 @@ public class ImportantDataAnalysis {
         try{
             Cursor cursor = mDb.query(TABLE_NAME,new String[]{COL_ID,COL_TIMEACT,COL_DESCRIPTION,
                             COL_LOCATION,COL_LATITUDE,COL_LONGITUDE,COL_IMPORTANT,COL_ARRIVE,COL_FREQ},COL_IMPORTANT+"=? AND "+COL_ARRIVE+"=?",new String[]{"1","0"},
-                    null,null,"frequency DESC limit 10");
+                    null,null,"frequency DESC limit 5");
             Cursor cursor2 = mDb.query(TABLE_NAME,new String[]{COL_ID,COL_TIMEACT,COL_DESCRIPTION,
                             COL_LOCATION,COL_LATITUDE,COL_LONGITUDE,COL_IMPORTANT,COL_ARRIVE,COL_FREQ},COL_IMPORTANT+"=? AND "+COL_ARRIVE+"=?",new String[]{"1","1"},
-                    null,null,"frequency DESC limit 10");
+                    null,null,"frequency DESC limit 5");
 
             ArrayList<DataAnalysis> dataAnalyses = new ArrayList<>();
 

@@ -15,7 +15,7 @@ public class List_Database {
     private double longitude;
     private int share;
     private int arrive;
-    public int important;
+    private int important;
 
     public int getID() {
         return ID;
@@ -31,6 +31,10 @@ public class List_Database {
 
     public void setLocationName(String locationName) {
         this.locationName = locationName;
+    }
+
+    public List_Database(String Description){
+        this.Description=Description;
     }
 
     public List_Database(int Date,int Time,String Description,String locationName,double latitude,double longitude,int share){
@@ -63,7 +67,8 @@ public class List_Database {
         setStatus(share);
         this.arrive = arrive;
     }
-    public List_Database(int Date,int Time,String Description,String locationName,double latitude,double longitude,int share,boolean arrive,boolean important){
+
+    public List_Database(int Date,int Time,String Description,String locationName,double latitude,double longitude,int share,boolean important,boolean arrive){
         this.Date=Date;
         this.Time=Time;
         this.Description=Description;
@@ -74,7 +79,7 @@ public class List_Database {
         this.arrive = arrive? 1 : 0;
         this.important = important? 1 : 0;
     }
-    public List_Database(int Date,int Time,String Description,String locationName,double latitude,double longitude,int share,int arrive,int important){
+    public List_Database(int Date,int Time,String Description,String locationName,double latitude,double longitude,int share,int important,int arrive){
         this.Date=Date;
         this.Time=Time;
         this.Description=Description;

@@ -83,24 +83,24 @@ public class Login extends AppCompatActivity {
             MainActivity.Email = currentUser.getEmail();
             startActivity(new Intent(getApplicationContext(),MainActivity.class));
             finish();
-            int fullstop=currentUser.getEmail().indexOf(".");
-            email=currentUser.getEmail().substring(0,fullstop);
-            DatabaseReference databaseReference =firebaseDatabase.getReference("Profiles/"+
-            email+"/");
-            databaseReference.addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(DataSnapshot dataSnapshot) {
-                    startActivity(new Intent(Login.this,facebookloginAct.class));
-                    facebookloginAct.Email=dataSnapshot.child("Email").getValue().toString();
-                    facebookloginAct.Name=dataSnapshot.child("Name").getValue().toString();
-                    facebookloginAct.Surname=dataSnapshot.child("Surname").getValue().toString();
-                    Login.this.finish();}
+            //int fullstop=currentUser.getEmail().indexOf(".");
+            //email=currentUser.getEmail().substring(0,fullstop);
+            //DatabaseReference databaseReference =firebaseDatabase.getReference("Profiles/"+
+            //email+"/");
+            //databaseReference.addValueEventListener(new ValueEventListener() {
+             //   @Override
+            //    public void onDataChange(DataSnapshot dataSnapshot) {
+            //        startActivity(new Intent(Login.this,facebookloginAct.class));
+            //        facebookloginAct.Email=dataSnapshot.child("Email").getValue().toString();
+            //        facebookloginAct.Name=dataSnapshot.child("Name").getValue().toString();
+             //       facebookloginAct.Surname=dataSnapshot.child("Surname").getValue().toString();
+             //       Login.this.finish();}
 
-                @Override
-                public void onCancelled(DatabaseError databaseError) {
+             //   @Override
+             //   public void onCancelled(DatabaseError databaseError) {
 
-                }
-            });
+            //    }
+            //});
 
         }
 
@@ -108,60 +108,60 @@ public class Login extends AppCompatActivity {
             MainActivity4.routine=true;
         }
 
-        mCallbackManager = CallbackManager.Factory.create();
-        Facebooklogin = (LoginButton)findViewById(R.id.btn_login_facebook);
-        Facebooklogin.setReadPermissions("email", "public_profile");
-        Facebooklogin.registerCallback(mCallbackManager, new FacebookCallback<LoginResult>() {
-            @Override
-            public void onSuccess(LoginResult loginResult) {
-                Log.d(TAG, "facebook:onSuccess:" + loginResult);
-                handleFacebookAccessToken(loginResult.getAccessToken());
-                GraphRequest request = GraphRequest.newMeRequest(
-                        loginResult.getAccessToken(),
-                        new GraphRequest.GraphJSONObjectCallback() {
-                            @Override
-                            public void onCompleted(JSONObject object, GraphResponse response) {
-                                try {
-                                    Log.w("Email",object.getString("email").toString());
-                                    Log.w("Name",object.getString("name").toString());
-                                    Log.w("ToString",object.toString());
-                                    int space=object.getString("name").indexOf(" ");
-                                    name=object.getString("name").toString().substring(0,space);
-                                    surname=object.getString("name").toString().substring(space+1);
-                                    email=object.getString("email").toString();
+        //mCallbackManager = CallbackManager.Factory.create();
+        //Facebooklogin = (LoginButton)findViewById(R.id.btn_login_facebook);
+        //Facebooklogin.setReadPermissions("email", "public_profile");
+        //Facebooklogin.registerCallback(mCallbackManager, new FacebookCallback<LoginResult>() {
+        //    @Override
+        //    public void onSuccess(LoginResult loginResult) {
+         //       Log.d(TAG, "facebook:onSuccess:" + loginResult);
+         //       handleFacebookAccessToken(loginResult.getAccessToken());
+         //       GraphRequest request = GraphRequest.newMeRequest(
+         //               loginResult.getAccessToken(),
+         //               new GraphRequest.GraphJSONObjectCallback() {
+         //                   @Override
+         //                   public void onCompleted(JSONObject object, GraphResponse response) {
+         //                       try {
+        //                          Log.w("Email",object.getString("email").toString());
+         //                           Log.w("Name",object.getString("name").toString());
+         //                           Log.w("ToString",object.toString());
+         //                           int space=object.getString("name").indexOf(" ");
+         //                           name=object.getString("name").toString().substring(0,space);
+         //                           surname=object.getString("name").toString().substring(space+1);
+         //                           email=object.getString("email").toString();
 
-                                    if( AccessToken.getCurrentAccessToken() != null){
-                                        startActivity(new Intent(Login.this,facebookloginAct.class));
-                                        facebookloginAct.Email=email;
-                                        facebookloginAct.Name=name;
-                                        facebookloginAct.Surname=surname;
-                                        Login.this.finish();
-                                    }
+         //                           if( AccessToken.getCurrentAccessToken() != null){
+         //                               startActivity(new Intent(Login.this,facebookloginAct.class));
+         //                               facebookloginAct.Email=email;
+         //                               facebookloginAct.Name=name;
+         //                               facebookloginAct.Surname=surname;
+         //                               Login.this.finish();
+         //                           }
 
-                                } catch (JSONException e) {
-                                    e.printStackTrace();
-                                }
-                            }
-                        }
-                );
-                Bundle parameters = new Bundle();
-                parameters.putString("fields", "id,name,email,gender,birthday");
-                request.setParameters(parameters);
-                request.executeAsync();
-            }
+         //                       } catch (JSONException e) {
+         //                           e.printStackTrace();
+         //                       }
+         //                   }
+         //               }
+         //       );
+         //       Bundle parameters = new Bundle();
+         //       parameters.putString("fields", "id,name,email,gender,birthday");
+         //       request.setParameters(parameters);
+         //       request.executeAsync();
+        //    }
 
-            @Override
-            public void onCancel() {
-                Log.d(TAG, "facebook:onCancel");
+         //   @Override
+         //   public void onCancel() {
+         //       Log.d(TAG, "facebook:onCancel");
                 // ...
-            }
+         //   }
 
-            @Override
-            public void onError(FacebookException error) {
-                Log.d(TAG, "facebook:onError", error);
-                // ...
-            }
-        });
+          //  @Override
+         //   public void onError(FacebookException error) {
+         //       Log.d(TAG, "facebook:onError", error);
+         //       // ...
+         //   }
+        //});
 
 
 

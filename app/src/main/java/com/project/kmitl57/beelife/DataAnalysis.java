@@ -118,4 +118,12 @@ public class DataAnalysis {
     public void setDayOfWeek(String DayOfWeek) {
         this.DayOfWeek = DayOfWeek;
     }
+
+    public int getImportant() {
+        return important;
+    }
+
+    public int getArrive() {
+        return arrive;
+    }
 }

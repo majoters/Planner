@@ -13,6 +13,7 @@ import java.util.Calendar;
 import java.util.Date;
 
 import devs.mulham.raee.sample.List_Database;
+import devs.mulham.raee.sample.MainActivity4;
 
 public class DayOfWeekDataAnalysis {
 
@@ -80,14 +81,19 @@ public class DayOfWeekDataAnalysis {
         values.put(COL_LOCATION,list_database.getLocationName());
         values.put(COL_LATITUDE,list_database.getLatitude());
         values.put(COL_LONGITUDE,list_database.getLongitude());
-        if(checkiterate(DayOfWeek,list_database)==0){
+        int n = checkiterate(DayOfWeek,list_database);
+        if(n == 0){
             values.put(COL_FREQ,1);
+            mDb.insert(TABLE_NAME,null,values);
         }
         else {
-            values.put(COL_FREQ,checkiterate(DayOfWeek,list_database)+1);
+            int ID = MainActivity4.SearchIndex(list_database);
+            values.put(COL_FREQ,n+1);
+            mDb.update(TABLE_NAME, values,
+                    COL_ID + "=?",
+                    new String[]{String.valueOf(ID)});
         }
 
-        mDb.insert(TABLE_NAME,null,values);
     }
 
 
@@ -174,8 +180,8 @@ public class DayOfWeekDataAnalysis {
         try{
             String day = getIntDayOfWeek(dayofweek);
             Cursor cursor = mDb.query(TABLE_NAME,new String[]{COL_ID,COL_DAYOFWEEK,COL_TIMEACT,COL_DESCRIPTION,
-                            COL_LOCATION,COL_LATITUDE,COL_LONGITUDE,COL_FREQ},null,null,  //new String[]{String.valueOf(dayofweek)}
-                    null,null,"frequency DESC limit 10");
+                            COL_LOCATION,COL_LATITUDE,COL_LONGITUDE,COL_FREQ},COL_DAYOFWEEK+"=?",new String[]{day},  //new String[]{String.valueOf(dayofweek)}
+                    null,null,"frequency DESC limit 5");
 
             ArrayList<DataAnalysis> dataAnalyses = new ArrayList<>();
 

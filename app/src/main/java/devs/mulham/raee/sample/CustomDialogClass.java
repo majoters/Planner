@@ -41,6 +41,7 @@ import com.google.android.gms.maps.GoogleMap;
 import java.util.ArrayList;
 import java.util.Date;
 
+import static devs.mulham.raee.sample.MainActivity4.ActivityImportant;
 import static devs.mulham.raee.sample.MainActivity4.ActivityLocation;
 import static devs.mulham.raee.sample.MainActivity4.ActivityName;
 import static devs.mulham.raee.sample.MainActivity4.ActivityTime;
@@ -133,11 +134,6 @@ public class CustomDialogClass extends Dialog implements android.view.View.OnCli
         plus=(Button)findViewById(R.id.add_to_share);
         mDataSet = new ArrayList<>();
         mDataSet.clear();
-        if (box.isChecked()) {
-            important = true;
-        } else {
-            important = false;
-        }
         switchCompat.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -193,6 +189,7 @@ public class CustomDialogClass extends Dialog implements android.view.View.OnCli
             description.setText(list_database.getDescription());
             simpleTimePicker.setCurrentHour(list_database.getTime()/100);
             simpleTimePicker.setCurrentMinute(list_database.getTime()%100);
+            box.setChecked(list_database.getImportant());
             locate.setText(list_database.getLocationName());
 
             if(!suggest){
@@ -317,15 +314,21 @@ public class CustomDialogClass extends Dialog implements android.view.View.OnCli
 
                         //Add if not have yet and Update if it is a exist data
                         if (list_database == null || suggest) {
+                            if (box.isChecked()) {
+                                important = true;
+                            } else if(!box.isChecked()) {
+                                important = false;
+                            }
                             ActivityName.add(description.getText().toString());
                             ActivityTime.add(hr + ":" + min);
                             ActivityLocation.add(locate.getText().toString());
                             ActivityArrive.add(false);
+                            ActivityImportant.add(important);
                             List_Database list = new List_Database(key_date, key_time, description.getText().toString(), String.valueOf(MainActivity4.location.getName()),
-                                    MainActivity4.location.getLatLng().latitude, MainActivity4.location.getLatLng().longitude, statusActivity,false,important);
+                                    MainActivity4.location.getLatLng().latitude, MainActivity4.location.getLatLng().longitude, statusActivity,important,false);
                             MainActivity4.databases.add(0, list);
                             MainActivity4.mDbAdabter_Model.createActivityList(new List_Database(key_date, key_time, description.getText().toString(), String.valueOf(MainActivity4.location.getName()),
-                                    MainActivity4.location.getLatLng().latitude, MainActivity4.location.getLatLng().longitude, statusActivity,false,important));
+                                    MainActivity4.location.getLatLng().latitude, MainActivity4.location.getLatLng().longitude, statusActivity,important,false));
                             MainActivity4.mDbDataForAnalysis_Model.InsertData(date.getHours() * 100 + date.getMinutes(),
                                     list);
                             MainActivity4.mDbDayOfWeekAnalysis_Model.InsertData(key_date,list);
@@ -362,15 +365,25 @@ public class CustomDialogClass extends Dialog implements android.view.View.OnCli
 
                             suggest = false;
                         } else {
+                            //new
+                            //box.setChecked(list_database.getImportant());
+                            //
+                            if (box.isChecked()) {
+                                important = true;
+                            } else if(!box.isChecked()) {
+                                important = false;
+                            }
                             NotificationMain.CancelEmergency=MainActivity4.mDbAdabter_Model.ListToID(list_database)+1000;
                             ActivityName.set(index, description.getText().toString());
                             ActivityTime.set(index, hr + ":" + min);
                             ActivityLocation.set(index, locate.getText().toString());
+                            ActivityArrive.set(index, false);
+                            ActivityImportant.set(index, important);
                             List_Database list = new List_Database(key_date, key_time, description.getText().toString(), locate.getText().toString()
-                                    , list_database.getLatitude(), list_database.getLongitude(), list_database.getStatus(),false);
+                                    , list_database.getLatitude(), list_database.getLongitude(), list_database.getStatus(),list_database.getImportant(),list_database.getArrive());
                             try {
                                 list = new List_Database(key_date, key_time, description.getText().toString(), locate.getText().toString(),
-                                        MainActivity4.location.getLatLng().latitude, MainActivity4.location.getLatLng().longitude, statusActivity,false);
+                                        MainActivity4.location.getLatLng().latitude, MainActivity4.location.getLatLng().longitude, statusActivity,important,list_database.getArrive());
                             } catch (NullPointerException e) {
 
                             }
@@ -410,7 +423,7 @@ public class CustomDialogClass extends Dialog implements android.view.View.OnCli
                         cancel();
 
                         //Set Update to list
-                        final CustomListView adapter = new CustomListView(getContext(), MainActivity4.ActivityTime, MainActivity4.ActivityName, MainActivity4.ActivityLocation,MainActivity4.ActivityOld,MainActivity4.ActivityArrive);
+                        final CustomListView adapter = new CustomListView(getContext(), MainActivity4.ActivityTime, MainActivity4.ActivityName, MainActivity4.ActivityLocation,MainActivity4.ActivityOld,MainActivity4.ActivityArrive,MainActivity4.ActivityImportant);
                         MainActivity4.listView.setAdapter(adapter);
                         listView.invalidate();
 
